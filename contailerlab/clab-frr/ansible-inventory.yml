@@ -1,0 +1,12 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-frr-router:
+          ansible_host: 172.20.20.11
+        clab-frr-server1:
+          ansible_host: 172.20.20.13
+        clab-frr-server2:
+          ansible_host: 172.20.20.12
+        clab-frr-server3:
+          ansible_host: 172.20.20.10

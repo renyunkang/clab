@@ -1,0 +1,36 @@
+name: vlan
+topology:
+  nodes:
+    router:
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+
+    server1:
+      kind: linux
+      image: rykren/nettools:latest
+      exec:
+      - ip addr add 10.10.10.2/24 dev eth1
+      - ip route replace default via 10.10.10.1
+    
+    server2:
+      kind: linux
+      image: rykren/nettools:latest
+      exec:
+      - ip addr add 10.10.11.2/24 dev eth1
+      - ip route replace default via 10.10.11.1
+
+    server3:
+      kind: linux
+      image: rykren/nettools:latest
+      exec:
+      - ip addr add 10.10.12.2/24 dev eth1
+      - ip route replace default via 10.10.12.1
+
+  links:
+  - endpoints: ["router:eth1", "server1:eth1"]
+  - endpoints: ["router:eth2", "server2:eth1"]
+  - endpoints: ["router:eth3", "server3:eth1"]
+

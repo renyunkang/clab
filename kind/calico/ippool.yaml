@@ -1,0 +1,7 @@
+apiVersion: crd.projectcalico.org/v1
+kind: IPPool
+metadata:
+  name: ippool
+spec:
+  cidr: 10.100.10.0/24
+  disabled: true

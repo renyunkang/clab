@@ -1,0 +1,91 @@
+{
+  "name": "srlceos01",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-e601a7bc5bf0",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "ceos": {
+      "index": "0",
+      "shortname": "ceos",
+      "longname": "clab-srlceos01-ceos",
+      "fqdn": "ceos.srlceos01.io",
+      "group": "",
+      "labdir": "/root/contailerlab/clab-srlceos01/ceos",
+      "kind": "ceos",
+      "image": "rykren/ceos:4.26.0F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:80:ab:64",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-e601a7bc5bf0",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/root/contailerlab/clab-srlceos01/ceos",
+        "clab-node-name": "ceos",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/contailerlab/simple.yaml",
+        "containerlab": "srlceos01"
+      }
+    },
+    "srl": {
+      "index": "1",
+      "shortname": "srl",
+      "longname": "clab-srlceos01-srl",
+      "fqdn": "srl.srlceos01.io",
+      "group": "",
+      "labdir": "/root/contailerlab/clab-srlceos01/srl",
+      "kind": "srl",
+      "image": "ghcr.io/nokia/srlinux",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-e601a7bc5bf0",
+        "clab-node-group": "",
+        "clab-node-kind": "srl",
+        "clab-node-lab-dir": "/root/contailerlab/clab-srlceos01/srl",
+        "clab-node-name": "srl",
+        "clab-node-type": "ixrd2",
+        "clab-topo-file": "/root/contailerlab/simple.yaml",
+        "containerlab": "srlceos01"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "srl",
+        "interface": "e1-1",
+        "mac": "aa:c1:ab:97:86:d9",
+        "peer": "z"
+      },
+      "z": {
+        "node": "ceos",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:22:9b:df",
+        "peer": "a"
+      }
+    }
+  ]
+}

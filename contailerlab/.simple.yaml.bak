@@ -1,0 +1,14 @@
+name: srlceos01
+
+topology:
+  nodes:
+    srl:
+      kind: srl
+      image: ghcr.io/nokia/srlinux
+    ceos:
+      kind: ceos
+      image: rykren/ceos:4.26.0F
+
+  links:
+    - endpoints: ["srl:e1-1", "ceos:eth1"]
+

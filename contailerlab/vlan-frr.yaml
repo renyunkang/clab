@@ -1,0 +1,70 @@
+name: vlan
+topology:
+  nodes:
+    router:
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+      exec:
+      - >-
+        vtysh -c 'conf t'
+        -c "set interfaces bridge br0 address '10.10.0.1/24'"
+        -c "set interfaces bridge br0 description 'leaf1-br'"
+        -c "set interfaces bridge br0 member interface eth1"
+        -c "set interfaces bridge br0 member interface eth2"
+        -c "set interfaces bridge br0 member interface eth3"
+        -c "set interfaces ethernet eth4 vif 10 description 'VLAN 10'"
+        -c "set interfaces ethernet eth4 vif 10 address '10.10.10.1/24'"
+        -c "set interfaces ethernet eth5 vif 11 description 'VLAN 11'"
+        -c "set interfaces ethernet eth5 vif 11 address '10.10.11.1/24'"
+        -c "commit"
+        -c "save"
+
+
+    server1:
+      kind: linux
+      image: rykren/nettools:latest
+      exec:
+      - ip addr add 10.10.0.2/24 dev eth1
+      - ip route replace default via 10.10.0.1
+
+    server2:
+      kind: linux
+      image: rykren/nettools:latest
+      exec:
+      - ip addr add 10.10.0.3/24 dev eth1
+      - ip route replace default via 10.10.0.1
+
+    server3:
+      kind: linux
+      image: rykren/nettools:latest
+      exec:
+      - ip addr add 10.10.0.4/24 dev eth1
+      - ip route replace default via 10.10.0.1
+
+    server4:
+      kind: linux
+      image: rykren/nettools:latest
+      exec:
+      - ip link add link eth1 name eth1.10 type vlan id 10
+      - ip addr add 10.10.10.2/24 dev eth1.10
+      - ip link set dev eth1.10 up
+      - ip route replace default via 10.10.10.1
+
+    server5:
+      kind: linux
+      image: rykren/nettools:latest
+      exec:
+      - ip link add link eth1 name eth1.11 type vlan id 11
+      - ip addr add 10.10.11.2/24 dev eth1.11
+      - ip link set dev eth1.11 up
+      - ip route replace default via 10.10.11.1
+
+  links:
+  - endpoints: ["router:eth1", "server1:eth1"]
+  - endpoints: ["router:eth2", "server2:eth1"]
+  - endpoints: ["router:eth3", "server3:eth1"]
+  - endpoints: ["router:eth4", "server4:eth1"]
+  - endpoints: ["router:eth5", "server5:eth1"]

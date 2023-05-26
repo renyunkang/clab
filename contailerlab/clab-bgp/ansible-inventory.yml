@@ -1,0 +1,22 @@
+all:
+  children:
+    linux:
+      hosts:
+        clab-bgp-leaf1:
+          ansible_host: 172.20.20.4
+        clab-bgp-leaf2:
+          ansible_host: 172.20.20.5
+        clab-bgp-server1:
+          ansible_host: 
+        clab-bgp-server2:
+          ansible_host: 
+        clab-bgp-server3:
+          ansible_host: 
+        clab-bgp-server4:
+          ansible_host: 
+        clab-bgp-server5:
+          ansible_host: 172.20.20.3
+        clab-bgp-spine1:
+          ansible_host: 172.20.20.2
+        clab-bgp-spine2:
+          ansible_host: 172.20.20.6

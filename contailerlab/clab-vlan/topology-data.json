@@ -1,0 +1,255 @@
+{
+  "name": "vlan",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-070d81f27d18",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "router": {
+      "index": "0",
+      "shortname": "router",
+      "longname": "clab-vlan-router",
+      "fqdn": "router.vlan.io",
+      "group": "",
+      "labdir": "/root/contailerlab/clab-vlan/router",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.9",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::9",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-070d81f27d18",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/contailerlab/clab-vlan/router",
+        "clab-node-name": "router",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/contailerlab/vlan-frr.yaml",
+        "containerlab": "vlan"
+      }
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-vlan-server1",
+      "fqdn": "server1.vlan.io",
+      "group": "",
+      "labdir": "/root/contailerlab/clab-vlan/server1",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::a",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-070d81f27d18",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/contailerlab/clab-vlan/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/contailerlab/vlan-frr.yaml",
+        "containerlab": "vlan"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-vlan-server2",
+      "fqdn": "server2.vlan.io",
+      "group": "",
+      "labdir": "/root/contailerlab/clab-vlan/server2",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.11",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::b",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-070d81f27d18",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/contailerlab/clab-vlan/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/contailerlab/vlan-frr.yaml",
+        "containerlab": "vlan"
+      }
+    },
+    "server3": {
+      "index": "3",
+      "shortname": "server3",
+      "longname": "clab-vlan-server3",
+      "fqdn": "server3.vlan.io",
+      "group": "",
+      "labdir": "/root/contailerlab/clab-vlan/server3",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-070d81f27d18",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/contailerlab/clab-vlan/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/contailerlab/vlan-frr.yaml",
+        "containerlab": "vlan"
+      }
+    },
+    "server4": {
+      "index": "4",
+      "shortname": "server4",
+      "longname": "clab-vlan-server4",
+      "fqdn": "server4.vlan.io",
+      "group": "",
+      "labdir": "/root/contailerlab/clab-vlan/server4",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-070d81f27d18",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/contailerlab/clab-vlan/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/contailerlab/vlan-frr.yaml",
+        "containerlab": "vlan"
+      }
+    },
+    "server5": {
+      "index": "5",
+      "shortname": "server5",
+      "longname": "clab-vlan-server5",
+      "fqdn": "server5.vlan.io",
+      "group": "",
+      "labdir": "/root/contailerlab/clab-vlan/server5",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-070d81f27d18",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/contailerlab/clab-vlan/server5",
+        "clab-node-name": "server5",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/contailerlab/vlan-frr.yaml",
+        "containerlab": "vlan"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "router",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:8b:47:60",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:89:7b:d5",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "router",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:f0:63:cb",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:53:36:6a",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "router",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:95:9c:69",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:0e:dd:ce",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "router",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:11:6a:b7",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:79:20:02",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "router",
+        "interface": "eth5",
+        "mac": "aa:c1:ab:23:59:92",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server5",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:c8:3e:64",
+        "peer": "a"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+apiVersion: network.kubesphere.io/v1alpha2
+kind: Eip
+metadata:
+  labels:
+    openelb.kubesphere.io/cni: calico
+  name: layer-eip
+spec:
+  address: 10.100.10.10-10.100.10.200
+  protocol: bgp

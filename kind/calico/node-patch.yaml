@@ -1,0 +1,131 @@
+apiVersion: projectcalico.org/v3
+items:
+- apiVersion: projectcalico.org/v3
+  kind: Node
+  metadata:
+    annotations:
+      projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"cluster-control-plane","kubernetes.io/os":"linux","node-role.kubernetes.io/control-plane":"","node.kubernetes.io/exclude-from-external-load-balancers":"","rack":"rack1"}'
+    creationTimestamp: "2023-04-12T09:09:21Z"
+    labels:
+      beta.kubernetes.io/arch: amd64
+      beta.kubernetes.io/os: linux
+      kubernetes.io/arch: amd64
+      kubernetes.io/hostname: cluster-control-plane
+      kubernetes.io/os: linux
+      node-role.kubernetes.io/control-plane: ""
+      node.kubernetes.io/exclude-from-external-load-balancers: ""
+      rack: rack1
+    name: cluster-control-plane
+    resourceVersion: "3698"
+    uid: 374cd2af-65fb-44a2-89c9-fbfb377126fb
+  spec:
+    addresses:
+    - address: 10.1.5.11/24
+      type: CalicoNodeIP
+    - address: 10.1.5.11
+      type: InternalIP
+    bgp:
+      asNumber: 65005
+      ipv4Address: 10.1.5.11/24
+    orchRefs:
+    - nodeName: cluster-control-plane
+      orchestrator: k8s
+  status:
+    podCIDRs:
+    - 10.233.64.0/24
+- apiVersion: projectcalico.org/v3
+  kind: Node
+  metadata:
+    annotations:
+      projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"cluster-worker","kubernetes.io/os":"linux","rack":"rack1"}'
+    creationTimestamp: "2023-04-12T09:09:45Z"
+    labels:
+      beta.kubernetes.io/arch: amd64
+      beta.kubernetes.io/os: linux
+      kubernetes.io/arch: amd64
+      kubernetes.io/hostname: cluster-worker
+      kubernetes.io/os: linux
+      rack: rack1
+    name: cluster-worker
+    resourceVersion: "3691"
+    uid: 6e6d9da5-7388-43fc-8572-14242cd3108c
+  spec:
+    addresses:
+    - address: 10.1.5.12/24
+      type: CalicoNodeIP
+    - address: 10.1.5.12
+      type: InternalIP
+    bgp:
+      asNumber: 65005
+      ipv4Address: 10.1.5.12/24
+    orchRefs:
+    - nodeName: cluster-worker
+      orchestrator: k8s
+  status:
+    podCIDRs:
+    - 10.233.66.0/24
+- apiVersion: projectcalico.org/v3
+  kind: Node
+  metadata:
+    annotations:
+      projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"cluster-worker2","kubernetes.io/os":"linux","rack":"rack2"}'
+    creationTimestamp: "2023-04-12T09:09:45Z"
+    labels:
+      beta.kubernetes.io/arch: amd64
+      beta.kubernetes.io/os: linux
+      kubernetes.io/arch: amd64
+      kubernetes.io/hostname: cluster-worker2
+      kubernetes.io/os: linux
+      rack: rack2
+    name: cluster-worker2
+    resourceVersion: "3694"
+    uid: 68b0ff22-7ca7-4048-936c-ed1e2c191415
+  spec:
+    addresses:
+    - address: 10.1.8.13/24
+      type: CalicoNodeIP
+    - address: 10.1.8.13
+      type: InternalIP
+    bgp:
+      asNumber: 65008
+      ipv4Address: 10.1.8.13/24
+    orchRefs:
+    - nodeName: cluster-worker2
+      orchestrator: k8s
+  status:
+    podCIDRs:
+    - 10.233.67.0/24
+- apiVersion: projectcalico.org/v3
+  kind: Node
+  metadata:
+    annotations:
+      projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"cluster-worker3","kubernetes.io/os":"linux","rack":"rack2"}'
+    creationTimestamp: "2023-04-12T09:09:44Z"
+    labels:
+      beta.kubernetes.io/arch: amd64
+      beta.kubernetes.io/os: linux
+      kubernetes.io/arch: amd64
+      kubernetes.io/hostname: cluster-worker3
+      kubernetes.io/os: linux
+      rack: rack2
+    name: cluster-worker3
+    resourceVersion: "3693"
+    uid: 00af37b7-2d80-4233-a6af-8bb2f5f8ea4b
+  spec:
+    addresses:
+    - address: 10.1.8.14/24
+      type: CalicoNodeIP
+    - address: 10.1.8.14
+      type: InternalIP
+    bgp:
+      asNumber: 65008
+      ipv4Address: 10.1.8.14/24
+    orchRefs:
+    - nodeName: cluster-worker3
+      orchestrator: k8s
+  status:
+    podCIDRs:
+    - 10.233.65.0/24
+kind: NodeList
+metadata:
+  resourceVersion: "3898"

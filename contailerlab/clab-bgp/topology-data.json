@@ -1,0 +1,392 @@
+{
+  "name": "bgp",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-d760c0efe9f8",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "leaf1": {
+      "index": "0",
+      "shortname": "leaf1",
+      "longname": "clab-bgp-leaf1",
+      "fqdn": "leaf1.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/leaf1",
+      "kind": "linux",
+      "image": "unibaktr/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/leaf1",
+        "clab-node-name": "leaf1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    },
+    "leaf2": {
+      "index": "1",
+      "shortname": "leaf2",
+      "longname": "clab-bgp-leaf2",
+      "fqdn": "leaf2.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/leaf2",
+      "kind": "linux",
+      "image": "unibaktr/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/leaf2",
+        "clab-node-name": "leaf2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    },
+    "server1": {
+      "index": "2",
+      "shortname": "server1",
+      "longname": "clab-bgp-server1",
+      "fqdn": "server1.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/server1",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    },
+    "server2": {
+      "index": "3",
+      "shortname": "server2",
+      "longname": "clab-bgp-server2",
+      "fqdn": "server2.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/server2",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    },
+    "server3": {
+      "index": "4",
+      "shortname": "server3",
+      "longname": "clab-bgp-server3",
+      "fqdn": "server3.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/server3",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    },
+    "server4": {
+      "index": "5",
+      "shortname": "server4",
+      "longname": "clab-bgp-server4",
+      "fqdn": "server4.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/server4",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    },
+    "server5": {
+      "index": "6",
+      "shortname": "server5",
+      "longname": "clab-bgp-server5",
+      "fqdn": "server5.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/server5",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/server5",
+        "clab-node-name": "server5",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    },
+    "spine1": {
+      "index": "7",
+      "shortname": "spine1",
+      "longname": "clab-bgp-spine1",
+      "fqdn": "spine1.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/spine1",
+      "kind": "linux",
+      "image": "unibaktr/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/spine1",
+        "clab-node-name": "spine1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    },
+    "spine2": {
+      "index": "8",
+      "shortname": "spine2",
+      "longname": "clab-bgp-spine2",
+      "fqdn": "spine2.bgp.io",
+      "group": "",
+      "labdir": "/root/clab/contailerlab/clab-bgp/spine2",
+      "kind": "linux",
+      "image": "unibaktr/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-d760c0efe9f8",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/contailerlab/clab-bgp/spine2",
+        "clab-node-name": "spine2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/contailerlab/spine-leaf-calico.yaml",
+        "containerlab": "bgp"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:8d:54:58",
+        "peer": "z"
+      },
+      "z": {
+        "node": "spine1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:1b:90:40",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:28:8a:02",
+        "peer": "z"
+      },
+      "z": {
+        "node": "spine2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:fb:e4:48",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:bb:9e:08",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "net0",
+        "mac": "aa:c1:ab:62:ea:7f",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:6e:80:4e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "net0",
+        "mac": "aa:c1:ab:1a:0b:96",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:e8:f2:70",
+        "peer": "z"
+      },
+      "z": {
+        "node": "spine1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:b0:66:d8",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:f8:af:a5",
+        "peer": "z"
+      },
+      "z": {
+        "node": "spine2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:3e:fd:f6",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf2",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:71:ff:fd",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "net0",
+        "mac": "aa:c1:ab:de:0b:3e",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf2",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:d6:9d:54",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server4",
+        "interface": "net0",
+        "mac": "aa:c1:ab:44:f5:e4",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf2",
+        "interface": "eth5",
+        "mac": "aa:c1:ab:5e:6c:0d",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server5",
+        "interface": "net0",
+        "mac": "aa:c1:ab:21:9e:94",
+        "peer": "a"
+      }
+    }
+  ]
+}

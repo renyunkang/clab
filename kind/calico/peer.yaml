@@ -1,0 +1,17 @@
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: rack1-to-leaf1
+spec:
+  peerIP: 10.1.5.1
+  asNumber: 65005
+  nodeSelector: rack == 'rack1'
+---
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: rack2-to-leaf2
+spec:
+  peerIP: 10.1.8.1
+  asNumber: 65008
+  nodeSelector: rack == 'rack2'

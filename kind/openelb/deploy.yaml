@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: layer-openelb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: layer-openelb
+  template:
+    metadata:
+      labels:
+        app: layer-openelb
+    spec:
+      containers:
+        - image: rykren/whoami
+          name: whoami
+          ports:
+            - containerPort: 80

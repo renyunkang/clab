@@ -1,0 +1,81 @@
+name: bgp
+topology:
+  nodes:
+    spine1:
+      kind: linux
+      image: unibaktr/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+
+    spine2:
+      kind: linux
+      image: unibaktr/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+
+    leaf1:
+      kind: linux
+      image: unibaktr/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+
+    leaf2: 
+      kind: linux
+      image: unibaktr/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+
+
+    br-leaf0:
+      kind: bridge
+    br-leaf1:
+      kind: bridge
+    
+    server1:
+      kind: linux
+      image: rykren/nettools:latest
+      network-mode: container:cluster-control-plane
+      exec:
+      - ip addr add 10.1.5.11/24 dev net0
+      - ip route replace default via 10.1.5.1
+    server2:
+      kind: linux
+      image: rykren/nettools:latest
+      network-mode: container:cluster-worker
+      exec:
+      - ip addr add 10.1.5.12/24 dev net0
+      - ip route replace default via 10.1.5.1
+
+    server3:
+      kind: linux
+      image: rykren/nettools:latest
+      network-mode: container:cluster-worker2
+      exec:
+      - ip addr add 10.1.8.13/24 dev net0
+      - ip route replace default via 10.1.8.1
+
+    server4:
+      kind: linux
+      image: rykren/nettools:latest
+      network-mode: container:cluster-worker3
+      exec:
+      - ip addr add 10.1.8.14/24 dev net0
+      - ip route replace default via 10.1.8.1
+
+  links:
+  - endpoints: ["br-leaf0:br-leaf0-net0", "server1:net0"]
+  - endpoints: ["br-leaf0:br-leaf0-net1", "server2:net0"]
+  - endpoints: ["br-leaf1:br-leaf1-net0", "server3:net0"]
+  - endpoints: ["br-leaf1:br-leaf1-net1", "server4:net0"]
+
+  - endpoints: ["leaf1:eth1", "spine1:eth1"]
+  - endpoints: ["leaf1:eth2", "spine2:eth1"]
+  - endpoints: ["leaf1:eth3", "br-leaf0:br-leaf0-net3"]
+
+  - endpoints: ["leaf2:eth1", "spine1:eth2"]
+  - endpoints: ["leaf2:eth2", "spine2:eth2"]
+  - endpoints: ["leaf2:eth3", "br-leaf1:br-leaf1-net3"]

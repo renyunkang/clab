@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: netools-bgp
+  name: netools-bgp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: netools-bgp
+  template:
+    metadata:
+      labels:
+        app: netools-bgp
+      annotations:
+        "networking.alibaba.com/specified-network": "underlay-network-bgp"
+    spec:
+      containers:
+      - image: rykren/nettools:latest
+        name: netools
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: netools-bgp2
+  name: netools-bgp2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: netools-bgp2
+  template:
+    metadata:
+      labels:
+        app: netools-bgp2
+      annotations:
+        "networking.alibaba.com/specified-network": "underlay-network-bgp2"
+    spec:
+      containers:
+      - image: rykren/nettools:latest
+        name: netools
+        ports:
+        - containerPort: 80
+      restartPolicy: Always

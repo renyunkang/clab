@@ -1,0 +1,6 @@
+apiVersion: networking.alibaba.com/v1
+kind: Network
+metadata:
+  name: global-bgp
+spec:
+  type: GlobalBGP
