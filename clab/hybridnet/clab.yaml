@@ -67,20 +67,24 @@ topology:
       image: rykren/nettools:latest
       network-mode: container:hybridnet-worker3
       exec:
-      - ip link add link eth1 name eth1.10 type vlan id 10
-      - ip addr add 10.10.10.2/24 dev eth1.10
-      - ip link set dev eth1.10 up
+      - ip addr add 10.10.10.2/24 dev eth1
       - ip route replace default via 10.10.10.1
+      # - ip link add link eth1 name eth1.10 type vlan id 10
+      # - ip addr add 10.10.10.2/24 dev eth1.10
+      # - ip link set dev eth1.10 up
+      # - ip route replace default via 10.10.10.1
 
     server5:
       kind: linux
       image: rykren/nettools:latest
       network-mode: container:hybridnet-worker4
       exec:
-      - ip link add link eth1 name eth1.11 type vlan id 11
-      - ip addr add 10.10.11.2/24 dev eth1.11
-      - ip link set dev eth1.11 up
+      - ip addr add 10.10.11.2/24 dev eth1
       - ip route replace default via 10.10.11.1
+      # - ip link add link eth1 name eth1.11 type vlan id 11
+      # - ip addr add 10.10.11.2/24 dev eth1.11
+      # - ip link set dev eth1.11 up
+      # - ip route replace default via 10.10.11.1
 
     server11:
       kind: linux
@@ -103,20 +107,24 @@ topology:
       image: rykren/nettools:latest
       network-mode: container:hybridnet-worker7
       exec:
-      - ip link add link eth1 name eth1.21 type vlan id 21
-      - ip addr add 10.11.21.2/24 dev eth1.21
-      - ip link set dev eth1.21 up
-      - ip route replace default via 10.11.21.1
+      - ip addr add 10.11.21.2/24 dev eth1
+      - ip route replace default via 10.11.21.2
+      # - ip link add link eth1 name eth1.21 type vlan id 21
+      # - ip addr add 10.11.21.2/24 dev eth1.21
+      # - ip link set dev eth1.21 up
+      # - ip route replace default via 10.11.21.1
 
     server14:
       kind: linux
       image: rykren/nettools:latest
       network-mode: container:hybridnet-worker8
       exec:
-      - ip link add link eth1 name eth1.22 type vlan id 22
-      - ip addr add 10.11.22.2/24 dev eth1.22
-      - ip link set dev eth1.22 up
+      - ip addr add 10.11.22.2/24 dev eth1
       - ip route replace default via 10.11.22.1
+      # - ip link add link eth1 name eth1.22 type vlan id 22
+      # - ip addr add 10.11.22.2/24 dev eth1.22
+      # - ip link set dev eth1.22 up
+      # - ip route replace default via 10.11.22.1
 
     server15:
       kind: linux

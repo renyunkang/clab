@@ -63,6 +63,11 @@ kubectl get nodes -o wide
 # 3.deploy  clab
 cat <<EOF>clab.yaml | clab deploy --reconfigure -t clab.yaml -
 name: calico-rr
+mgmt:
+  network: clab
+  bridge: clab
+  ipv4-subnet: 172.30.30.0/24 # ip range for the docker network
+  ipv4-gw: 172.30.30.1 # set custom gateway ip
 topology:
   nodes:
     spine1:
