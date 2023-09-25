@@ -96,6 +96,7 @@ networking:
   disableDefaultCNI: true
   podSubnet: 10.233.64.0/18
   serviceSubnet: 10.233.0.0/18
+  kubeProxyMode: "ipvs"
 EOF
 
 
@@ -217,7 +218,7 @@ topology:
       network-mode: container:${node7}
       exec:
       - ip addr add 10.11.21.2/24 dev eth1
-      - ip route replace default via 10.11.21.2
+      - ip route replace default via 10.11.21.1
       # - ip link add link eth1 name eth1.21 type vlan id 21
       # - ip addr add 10.11.21.2/24 dev eth1.21
       # - ip link set dev eth1.21 up
