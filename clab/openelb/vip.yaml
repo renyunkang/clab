@@ -1,0 +1,46 @@
+apiVersion: network.kubesphere.io/v1alpha2
+kind: Eip
+metadata:
+  name: vip-eip
+spec:
+  address: 192.168.0.100-192.168.0.199
+  protocol: vip
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vip-whoami
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vip-whoami
+  template:
+    metadata:
+      labels:
+        app: vip-whoami
+    spec:
+      containers:
+        - image: rykren/whoami
+          imagePullPolicy: IfNotPresent
+          name: whoami
+          ports:
+            - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: vip-whoami
+  annotations:
+    lb.kubesphere.io/v1alpha1: openelb
+    protocol.openelb.kubesphere.io/v1alpha1: vip
+    eip.openelb.kubesphere.io/v1alpha2: vip-eip
+spec:
+  selector:
+    app: vip-whoami
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  externalTrafficPolicy: Cluster
