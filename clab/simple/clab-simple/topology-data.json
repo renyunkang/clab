@@ -1,0 +1,162 @@
+{
+  "name": "simple",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "clab",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.30.30.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "fe80::42:61ff:feab:75c",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "leaf1": {
+      "index": "0",
+      "shortname": "leaf1",
+      "longname": "clab-simple-leaf1",
+      "fqdn": "leaf1.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/simple/clab-simple/leaf1",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/simple/clab-simple/leaf1",
+        "clab-node-name": "leaf1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/simple/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-simple-server1",
+      "fqdn": "server1.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/simple/clab-simple/server1",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/simple/clab-simple/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/simple/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-simple-server2",
+      "fqdn": "server2.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/simple/clab-simple/server2",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/simple/clab-simple/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/simple/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server3": {
+      "index": "3",
+      "shortname": "server3",
+      "longname": "clab-simple-server3",
+      "fqdn": "server3.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/simple/clab-simple/server3",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/simple/clab-simple/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/simple/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server4": {
+      "index": "4",
+      "shortname": "server4",
+      "longname": "clab-simple-server4",
+      "fqdn": "server4.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/simple/clab-simple/server4",
+      "kind": "linux",
+      "image": "rykren/nettools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/simple/clab-simple/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/simple/clab.yaml",
+        "containerlab": "simple"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "{
+  "name": "simple",
+  "type": "clab"
+}

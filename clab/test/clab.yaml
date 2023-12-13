@@ -1,0 +1,53 @@
+name: frr
+
+topology:
+  nodes:
+    router1:
+      kind: linux
+      image: rykren/frr:v8.4.1
+      binds:
+        - router1/daemons:/etc/frr/daemons
+        - router1/frr.conf:/etc/frr/frr.conf
+    router2:
+      kind: linux
+      image: rykren/frr:v8.4.1
+      binds:
+        - router2/daemons:/etc/frr/daemons
+        - router2/frr.conf:/etc/frr/frr.conf
+    router3:
+      kind: linux
+      image: rykren/frr:v8.4.1
+      binds:
+        - router3/daemons:/etc/frr/daemons
+        - router3/frr.conf:/etc/frr/frr.conf
+    PC1:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 192.168.11.2/24 dev eth1
+      - ip route add 192.168.0.0/16 via 192.168.11.1 dev eth1
+      - ip route add 10.10.10.0/24 via 192.168.11.1 dev eth1
+
+    PC2:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 192.168.12.2/24 dev eth1
+      - ip route add 192.168.0.0/16 via 192.168.12.1 dev eth1
+      - ip route add 10.10.10.0/24 via 192.168.12.1 dev eth1
+
+    PC3:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 192.168.13.2/24 dev eth1
+      - ip route add 192.168.0.0/16 via 192.168.13.1 dev eth1
+      - ip route add 10.10.10.0/24 via 192.168.13.1 dev eth1
+
+  links:
+    - endpoints: ["router1:eth1", "router2:eth1"]
+    - endpoints: ["router1:eth2", "router3:eth1"]
+    - endpoints: ["router2:eth2", "router3:eth2"]
+    - endpoints: ["PC1:eth1", "router1:eth3"]
+    - endpoints: ["PC2:eth1", "router2:eth3"]
+    - endpoints: ["PC3:eth1", "router3:eth3"]

@@ -1,0 +1,37 @@
+all:
+  vars:
+    # The generated inventory is assumed to be used from the clab host.
+    # Hence no http proxy should be used. Therefore we make sure the http
+    # module does not attempt using any global http proxy.
+    ansible_httpapi_use_proxy: false
+  children:
+    linux:
+      hosts:
+        clab-hybirdnet-leaf1:
+          ansible_host: 172.30.30.3
+        clab-hybirdnet-leaf2:
+          ansible_host: 172.30.30.2
+        clab-hybirdnet-server1:
+          ansible_host: 
+        clab-hybirdnet-server11:
+          ansible_host: 
+        clab-hybirdnet-server12:
+          ansible_host: 
+        clab-hybirdnet-server13:
+          ansible_host: 
+        clab-hybirdnet-server14:
+          ansible_host: 
+        clab-hybirdnet-server15:
+          ansible_host: 172.30.30.4
+        clab-hybirdnet-server2:
+          ansible_host: 
+        clab-hybirdnet-server3:
+          ansible_host: 
+        clab-hybirdnet-server4:
+          ansible_host: 
+        clab-hybirdnet-server5:
+          ansible_host: 
+        clab-hybirdnet-spine1:
+          ansible_host: 172.30.30.5
+        clab-hybirdnet-spine2:
+          ansible_host: 172.30.30.6

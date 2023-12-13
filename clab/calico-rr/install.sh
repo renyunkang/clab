@@ -7,6 +7,7 @@ master="${name}-control-plane"
 node1="${name}-worker"
 node2="${name}-worker2"
 node3="${name}-worker3"
+images=(calico/node:v3.26.1 calico/cni:v3.26.1 calico/kube-controllers:v3.26.1 rykren/netools:latest)
 
 # 1.prep no cni - cluster env
 cat <<EOF | kind create cluster --name=${name} --image=kindest/node:v1.24.7@sha256:577c630ce8e509131eab1aea12c022190978dd2f745aac5eb1fe65c0807eb315 --config=-
@@ -14,6 +15,19 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
+  extraPortMappings:
+  - containerPort: 30880
+    hostPort: 30880
+    listenAddress: "0.0.0.0"
+    protocol: tcp
+  - containerPort: 30881
+    hostPort: 30881
+    listenAddress: "0.0.0.0"
+    protocol: tcp
+  - containerPort: 30882
+    hostPort: 30882
+    listenAddress: "0.0.0.0"
+    protocol: tcp
   kubeadmConfigPatches:
   - |
     kind: InitConfiguration
@@ -156,6 +170,12 @@ EOF
 
 # 4. config cni
 # 4.1 install CNI[Calico v3.23.2]
+# 4. config cni
+for i in "${images[@]}"
+do
+    docker pull $i
+    kind load docker-image --name=${name} $i
+done
 kubectl apply -f ./calico.yaml
 
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A

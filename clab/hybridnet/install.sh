@@ -271,7 +271,7 @@ done
 
 helm repo add hybridnet https://alibaba.github.io/hybridnet/
 helm repo update
-helm install hybridnet hybridnet/hybridnet -n kube-system --set init.cidr=10.233.64.0/18 --set daemon.preferVlanInterfaces=${vlanic} --set daemon.preferVxlanInterfaces=${vxlanic} --set manager.replicas=${replicas} --set webhook.replicas=${replicas} --set typha.replicas=${replicas} --set daemon.enableNetworkPolicy=${networkPolicy} --version ${chartVersion}
+helm install hybridnet hybridnet/hybridnet -n kube-system --set init.cidr=10.233.64.0/18 --set daemon.preferVlanInterfaces=${vlanic} --set daemon.preferVxlanInterfaces=${vxlanic} --set manager.replicas=${replicas} --set webhook.replicas=${replicas} --set typha.replicas=${replicas} --set daemon.enableNetworkPolicy=${networkPolicy} --set defaultNetworkType=Underlay --version ${chartVersion}
 kubectl set image -n kube-system daemonset/hybridnet-daemon *="rykren/hybridnet:latest-amd64"
 
 
