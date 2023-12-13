@@ -1,0 +1,17 @@
+apiVersion: network.kubesphere.io/v1alpha2
+kind: BgpConf
+metadata:
+  name: default
+spec:
+  as: 64512
+  listenPort: 17900
+  routerId: 172.20.0.2
+---
+apiVersion: network.kubesphere.io/v1alpha2
+kind: BgpPeer
+metadata:
+  name: bgp-peer
+spec:
+  conf:
+    peerAs: 64500
+    neighborAddress: 172.20.0.5
