@@ -1,0 +1,7 @@
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+  - level: RequestResponse
+    users:
+    - system:serviceaccount:kube-system:calico-typha
+    - system:serviceaccount:kube-system:calico-node
