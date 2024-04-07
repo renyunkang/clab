@@ -24,8 +24,8 @@ alias vleaf2-exec='docker exec -it clab-bgp-leaf2 su vyos'
 ```
 
 
-### Required tools
-#### kind
+## Required tools
+### kind
 https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
 ```
 # For AMD64 / x86_64
@@ -36,12 +36,13 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 ```
 
-#### containerlab
+### containerlab
+https://containerlab.dev/install/
 ```
 bash -c "$(curl -sL https://get.containerlab.dev)"
 ```
 
-#### kubectl
+### kubectl
 https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux
 ```
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
