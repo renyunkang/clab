@@ -1,0 +1,32 @@
+apiVersion: network.kubesphere.io/v1alpha2
+kind: BgpConf
+metadata:
+  name: default
+spec:
+  as: 64512
+  listenPort: 17900
+  routerId: 10.1.5.11
+---
+apiVersion: network.kubesphere.io/v1alpha2
+kind: BgpPeer
+metadata:
+  name: bgppeer-leaf1
+spec:
+  conf:
+    peerAs: 65005
+    neighborAddress: 10.1.5.1
+  nodeSelector:
+    matchLabels:
+      openelb.kubesphere.io/rack: leaf1
+---
+apiVersion: network.kubesphere.io/v1alpha2
+kind: BgpPeer
+metadata:
+  name: bgppeer-leaf2
+spec:
+  conf:
+    peerAs: 65008
+    neighborAddress: 10.1.8.1
+  nodeSelector:
+    matchLabels:
+      openelb.kubesphere.io/rack: leaf2
