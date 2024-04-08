@@ -1,0 +1,48 @@
+name: single
+mgmt:
+  network: clab
+  bridge: clab
+  ipv4-subnet: 172.30.30.0/24 # ip range for the docker network
+  ipv4-gw: 172.30.30.1 # set custom gateway ip
+topology:
+  nodes:
+    leaf: 
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos/config-leaf.cfg:/opt/vyatta/etc/config/config.boot
+
+
+    server1:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:single-control-plane
+      exec:
+      - ip addr add 192.168.10.11/24 dev net0
+    server2:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:single-worker
+      exec:
+      - ip addr add 192.168.10.12/24 dev net0
+    server3:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:single-worker2
+      exec:
+      - ip addr add 192.168.10.13/24 dev net0
+
+    client:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 192.168.10.15/24 dev net0
+      - ip route replace default via 192.168.10.1
+  links:
+  - endpoints: ["leaf:eth1", "server1:net0"]
+  - endpoints: ["leaf:eth2", "server2:net0"]
+  - endpoints: ["leaf:eth3", "server3:net0"]
+  - endpoints: ["leaf:eth4", "client:net0"]
+

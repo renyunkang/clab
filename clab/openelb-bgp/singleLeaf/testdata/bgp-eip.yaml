@@ -1,0 +1,6 @@
+apiVersion: network.kubesphere.io/v1alpha2
+kind: Eip
+metadata:
+  name: bgp-eip
+spec:
+  address: 10.10.100.0/24

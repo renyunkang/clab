@@ -22,3 +22,37 @@ alias vspine2-exec='docker exec -it clab-bgp-spine2 su vyos'
 alias vleaf1-exec='docker exec -it clab-bgp-leaf1 su vyos'
 alias vleaf2-exec='docker exec -it clab-bgp-leaf2 su vyos'
 ```
+
+
+## Required tools
+### Docker
+https://docs.docker.com/engine/install/
+```shell
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+### kind
+https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
+```shell
+# For AMD64 / x86_64
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.22.0/kind-linux-amd64
+# For ARM64
+[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.22.0/kind-linux-arm64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+```
+
+### containerlab
+https://containerlab.dev/install/
+```shell
+bash -c "$(curl -sL https://get.containerlab.dev)"
+```
+
+### kubectl
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux
+```shell
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+```
