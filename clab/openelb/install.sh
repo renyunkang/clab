@@ -3,7 +3,7 @@ date
 set -v
 
 name="openelb"
-REPO=${REPO:-}
+REPO=${REPO:-rykren}
 TAG=${TAG:-latest}
 master="${name}-control-plane"
 node1="${name}-worker"

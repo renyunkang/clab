@@ -1,0 +1,160 @@
+{
+  "name": "noderr",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "clab",
+        "ipv4-subnet": "172.30.30.0/24",
+        "ipv4-gw": "172.30.30.1",
+        "mtu": "1500",
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "router": {
+      "index": "0",
+      "shortname": "router",
+      "longname": "clab-noderr-router",
+      "fqdn": "router.noderr.io",
+      "group": "",
+      "labdir": "/root/test/clab/clab/calico-noderr/clab-noderr/router",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/test/clab/clab/calico-noderr/clab-noderr/router",
+        "clab-node-name": "router",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/test/clab/clab/calico-noderr/clab.yaml",
+        "containerlab": "noderr"
+      }
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-noderr-server1",
+      "fqdn": "server1.noderr.io",
+      "group": "",
+      "labdir": "/root/test/clab/clab/calico-noderr/clab-noderr/server1",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/test/clab/clab/calico-noderr/clab-noderr/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/test/clab/clab/calico-noderr/clab.yaml",
+        "containerlab": "noderr"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-noderr-server2",
+      "fqdn": "server2.noderr.io",
+      "group": "",
+      "labdir": "/root/test/clab/clab/calico-noderr/clab-noderr/server2",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/test/clab/clab/calico-noderr/clab-noderr/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/test/clab/clab/calico-noderr/clab.yaml",
+        "containerlab": "noderr"
+      }
+    },
+    "server3": {
+      "index": "3",
+      "shortname": "server3",
+      "longname": "clab-noderr-server3",
+      "fqdn": "server3.noderr.io",
+      "group": "",
+      "labdir": "/root/test/clab/clab/calico-noderr/clab-noderr/server3",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/test/clab/clab/calico-noderr/clab-noderr/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/test/clab/clab/calico-noderr/clab.yaml",
+        "containerlab": "noderr"
+      }
+    },
+    "server4": {
+      "index": "4",
+      "shortname": "server4",
+      "longname": "clab-noderr-server4",
+      "fqdn": "server4.noderr.io",
+      "group": "",
+      "labdir": "/root/test/clab/clab/calico-noderr/clab-noderr/server4",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/test/clab/clab/calico-noderr/clab-noderr/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/test/clab/clab/calico-noderr/clab.yaml",
+        "containerlab": "noderr"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "{
+  "name": "noderr",
+  "type": "clab"
+}

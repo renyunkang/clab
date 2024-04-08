@@ -1,0 +1,8 @@
+apiVersion: crd.projectcalico.org/v1
+kind: IPReservation
+metadata:
+  name: ipreservate
+spec:
+  reservedCIDRs:
+    - 10.38.46.192/27
+    - 10.38.46.224/27
