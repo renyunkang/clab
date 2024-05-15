@@ -103,11 +103,18 @@ topology:
       - ip route replace default via 192.168.0.1
       - bird -c /root/bird.conf
 
+    server5:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 192.168.0.6/24 dev eth1
+      - ip route replace default via 192.168.0.1
   links:
   - endpoints: ["router:eth1", "server1:eth1"]
   - endpoints: ["router:eth2", "server2:eth1"]
   - endpoints: ["router:eth3", "server3:eth1"]
   - endpoints: ["router:eth4", "server4:eth1"]
+  - endpoints: ["router:eth5", "server5:eth1"]
 EOF
 # docker run --name client -d --network=kind --ip=192.168.0.5 --privileged=true -v $(pwd)/bgpconf:/root/ rykren/netools:latest
 # docker exec -it client bird -c /root/bird.conf
