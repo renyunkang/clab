@@ -63,6 +63,10 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 ### k9s
 https://github.com/derailed/k9s/releases
 ```shell
+# install script
+curl -sS https://webinstall.dev/k9s | bash
+
+# other way: download binary
 wget https://github.com/derailed/k9s/releases/download/v0.32.4/k9s_Linux_amd64.tar.gz
 tar -zxf k9s_Linux_amd64.tar.gz
 chmod +x ./k9s
@@ -70,7 +74,6 @@ mv ./k9s /usr/local/bin/k9s
 ```
 
 ### helm
-
 https://github.com/derailed/k9s/releases
 ```shell
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
