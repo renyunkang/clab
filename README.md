@@ -68,3 +68,10 @@ tar -zxf k9s_Linux_amd64.tar.gz
 chmod +x ./k9s
 mv ./k9s /usr/local/bin/k9s
 ```
+
+### helm
+
+https://github.com/derailed/k9s/releases
+```shell
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+```
