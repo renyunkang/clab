@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: whoami
+  template:
+    metadata:
+      labels:
+        app: whoami
+    spec:
+      containers:
+        - image: rykren/whoami
+          name: whoami
+          ports:
+            - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: whoami-layer2
+  annotations:
+    lb.kubesphere.io/v1alpha1: openelb
+    eip.openelb.kubesphere.io/v1alpha2: layer2-eip
+spec:
+  selector:
+    app: whoami
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  externalTrafficPolicy: Cluster
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: whoami-vip
+  annotations:
+    lb.kubesphere.io/v1alpha1: openelb
+    eip.openelb.kubesphere.io/v1alpha2: vip-eip
+spec:
+  selector:
+    app: whoami
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  externalTrafficPolicy: Cluster

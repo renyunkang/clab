@@ -1,0 +1,21 @@
+all:
+  vars:
+    # The generated inventory is assumed to be used from the clab host.
+    # Hence no http proxy should be used. Therefore we make sure the http
+    # module does not attempt using any global http proxy.
+    ansible_httpapi_use_proxy: false
+  children:
+    linux:
+      hosts:
+        clab-simple-route:
+          ansible_host: 172.30.30.4
+        clab-simple-server1:
+          ansible_host: 
+        clab-simple-server2:
+          ansible_host: 
+        clab-simple-server3:
+          ansible_host: 
+        clab-simple-server4:
+          ansible_host: 172.30.30.2
+        clab-simple-server5:
+          ansible_host: 172.30.30.3

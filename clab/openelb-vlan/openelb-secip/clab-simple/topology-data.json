@@ -1,0 +1,187 @@
+{
+  "name": "simple",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "clab",
+        "ipv4-subnet": "172.30.30.0/24",
+        "ipv4-gw": "172.30.30.1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "route": {
+      "index": "0",
+      "shortname": "route",
+      "longname": "clab-simple-route",
+      "fqdn": "route.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/route",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/route",
+        "clab-node-name": "route",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/openelb-vlan/openelb-secip/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-simple-server1",
+      "fqdn": "server1.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server1",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/openelb-vlan/openelb-secip/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-simple-server2",
+      "fqdn": "server2.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server2",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/openelb-vlan/openelb-secip/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server3": {
+      "index": "3",
+      "shortname": "server3",
+      "longname": "clab-simple-server3",
+      "fqdn": "server3.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server3",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/openelb-vlan/openelb-secip/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server4": {
+      "index": "4",
+      "shortname": "server4",
+      "longname": "clab-simple-server4",
+      "fqdn": "server4.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server4",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/openelb-vlan/openelb-secip/clab.yaml",
+        "containerlab": "simple"
+      }
+    },
+    "server5": {
+      "index": "5",
+      "shortname": "server5",
+      "longname": "clab-simple-server5",
+      "fqdn": "server5.simple.io",
+      "group": "",
+      "labdir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server5",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/openelb-vlan/openelb-secip/clab-simple/server5",
+        "clab-node-name": "server5",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/clab/clab/openelb-vlan/openelb-secip/clab.yaml",
+        "containerlab": "simple"
+      }
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "{
+  "name": "simple",
+  "type": "clab"
+}

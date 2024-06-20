@@ -1,0 +1,23 @@
+apiVersion: network.kubesphere.io/v1alpha2
+kind: BgpPeer
+metadata:
+  name: bgp-peer-spine1
+spec:
+  conf:
+    peerAs: 500
+    neighborAddress: 10.1.10.2
+  nodeSelector:
+    matchLabels:
+      rack: rack1
+---
+apiVersion: network.kubesphere.io/v1alpha2
+kind: BgpPeer
+metadata:
+  name: bgp-peer-spine2
+spec:
+  conf:
+    peerAs: 800
+    neighborAddress: 10.1.12.2
+  nodeSelector:
+    matchLabels:
+      rack: rack2

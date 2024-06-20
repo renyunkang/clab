@@ -7,6 +7,12 @@ master="${name}-control-plane"
 node1="${name}-worker"
 node2="${name}-worker2"
 node3="${name}-worker3"
+LB=${LB:-false}
+pathDir="vyos-calico"
+if [ "$LB" = true ]; then
+    echo "use lb config ..."
+    pathDir="vyos-calico-lb"
+fi
 images=(calico/node:v3.26.1 calico/cni:v3.26.1 calico/kube-controllers:v3.26.1 rykren/netools:latest)
 
 # 1.prep no cni - cluster env
@@ -90,7 +96,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - vyos-calico/config-spine1.cfg:/opt/vyatta/etc/config/config.boot
+        - ${pathDir}/config-spine1.cfg:/opt/vyatta/etc/config/config.boot
 
     spine2:
       kind: linux
@@ -98,7 +104,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - vyos-calico/config-spine2.cfg:/opt/vyatta/etc/config/config.boot
+        - ${pathDir}/config-spine2.cfg:/opt/vyatta/etc/config/config.boot
 
     leaf1:
       kind: linux
@@ -106,7 +112,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - vyos-calico/config-leaf1.cfg:/opt/vyatta/etc/config/config.boot
+        - ${pathDir}/config-leaf1.cfg:/opt/vyatta/etc/config/config.boot
 
     leaf2: 
       kind: linux
@@ -114,7 +120,7 @@ topology:
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
-        - vyos-calico/config-leaf2.cfg:/opt/vyatta/etc/config/config.boot
+        - ${pathDir}/config-leaf2.cfg:/opt/vyatta/etc/config/config.boot
 
 
     server1:
