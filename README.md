@@ -57,6 +57,12 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 ```
 
+```shell
+apt-get install bash-completion
+echo 'source <(kubectl completion bash)' >> ~/.bashrc
+source ~/.bashrc
+```
+
 
 ## Other tools
 
