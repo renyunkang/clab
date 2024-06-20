@@ -1,0 +1,14 @@
+apiVersion: crd.projectcalico.org/v1
+kind: IPPool
+metadata:
+  name: ippool
+spec:
+  allowedUses:
+  - Workload
+  - Tunnel
+  blockSize: 122
+  cidr: 2001::00/64
+  ipipMode: Never
+  natOutgoing: true
+  nodeSelector: all()
+  vxlanMode: Never

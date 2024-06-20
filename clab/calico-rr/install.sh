@@ -228,4 +228,8 @@ spec:
   nodeSelector: rack == 'rack2'
 EOF
 
-
+kubectl patch ippool default-ipv4-ippool --type='json' -p='[{"op": "replace", "path": "/spec/ipipMode", "value":"Never"}]'
+docker cp calicoctl ${master}:/usr/local/bin/
+docker cp calicoctl ${node1}:/usr/local/bin/
+docker cp calicoctl ${node2}:/usr/local/bin/
+docker cp calicoctl ${node3}:/usr/local/bin/

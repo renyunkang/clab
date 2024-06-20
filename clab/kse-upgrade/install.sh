@@ -24,14 +24,15 @@ EOF
 cp  /root/.kube/config  /root/.kube/config-3.5
 kubectl apply -f ./calico.yaml --kubeconfig=/root/.kube/config-3.5
 kubectl apply -f ./installer-3.5.0.yaml --kubeconfig=/root/.kube/config-3.5
-kubectl apply -f ./cluster-3.5.0.yaml --kubeconfig=/root/.kube/config-3.5
+kubectl apply -f ./cluster-3.5-single.yaml --kubeconfig=/root/.kube/config-3.5
 
 echo "# begin kind cluster-${name}" >> ~/.bash_aliases
 echo "alias kubectl3='kubectl --kubeconfig=/root/.kube/config-3.5'" >> ~/.bash_aliases
 echo "# end kind cluster-${name}" >> ~/.bash_aliases
 echo "" >> ~/.bash_aliases
+source ~/.bashrc
 
-
+exit 0
 
 cat <<EOF | kind create cluster --name=${name2} --image=kindest/node:v1.24.7@sha256:577c630ce8e509131eab1aea12c022190978dd2f745aac5eb1fe65c0807eb315 --config=-
 kind: Cluster
