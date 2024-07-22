@@ -8,7 +8,8 @@ TAG=${TAG:-latest}
 master="${name}-control-plane"
 node1="${name}-worker"
 node2="${name}-worker2"
-k8simages="kindest/node:v1.24.7@sha256:577c630ce8e509131eab1aea12c022190978dd2f745aac5eb1fe65c0807eb315"
+#k8simages="kindest/node:v1.24.7@sha256:577c630ce8e509131eab1aea12c022190978dd2f745aac5eb1fe65c0807eb315"
+k8simages="kindest/node:v1.29.2"
 
 # 1.prep no cni - cluster env
 cat <<EOF | kind create cluster --name=${name} --image=${k8simages} --config=-
@@ -132,13 +133,16 @@ if [ -n "$LOAD" ]; then
     kind load docker-image --name=${name} calico/cni:v3.26.1
     kind load docker-image --name=${name} registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.1.1
 fi
+kubectl wait --timeout=600s --for=condition=Ready=true pods --all -A
 
 # 5.install openelb
-kubectl apply -f ./openelb.yaml
-kubectl set image -n openelb-system deployment/openelb-controller *="${REPO}/openelb-controller:${TAG}"
-kubectl set image -n openelb-system daemonset/openelb-speaker *="${REPO}/openelb-speaker:${TAG}"
-kubectl wait -n openelb-system --timeout=100s --for=condition=Available deployment/openelb-controller
-#kubectl wait -n openelb-system --timeout=100s --for=condition=Available ds/openelb-speaker
+kubectl apply -f https://raw.githubusercontent.com/openelb/openelb/master/deploy/openelb.yaml
+#kubectl set image -n openelb-system deployment/openelb-controller *="${REPO}/openelb-controller:${TAG}"
+#kubectl set image -n openelb-system daemonset/openelb-speaker *="${REPO}/openelb-speaker:${TAG}"
+
+kubectl wait --timeout=100s --for=condition=Ready=true pods -l 'app=openelb-controller' -A
+kubectl wait --timeout=100s --for=condition=Ready=true pods -l 'app=openelb' -A
+
 sleep 10
 
 kubectl apply -f bgp.yaml
