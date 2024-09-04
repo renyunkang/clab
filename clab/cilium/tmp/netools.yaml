@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netools
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: netools
+  template:
+    metadata:
+      labels:
+        app: netools
+    spec:
+      containers:
+        - image: rykren/netools
+          name: netools
+          ports:
+            - containerPort: 80
