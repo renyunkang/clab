@@ -84,3 +84,9 @@ https://github.com/derailed/k9s/releases
 ```shell
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 ```
+
+### direnv
+```shell
+curl -sfL https://direnv.net/install.sh | bash
+```
+
