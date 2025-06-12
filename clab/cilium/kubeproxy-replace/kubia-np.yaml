@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia-np
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kubia-np
+  template:
+    metadata:
+      labels:
+        app: kubia-np
+    spec:
+      containers:
+        - image: rykren/kubia
+          name: kubia-np
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-np
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: kubia-np
+  type: NodePort
+

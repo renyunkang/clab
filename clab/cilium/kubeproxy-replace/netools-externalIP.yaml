@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netools
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: netools
+  template:
+    metadata:
+      labels:
+        app: netools
+    spec:
+      containers:
+        - image: rykren/netools
+          name: netools
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netools
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: netools
+  type: ClusterIP
+

@@ -1,0 +1,98 @@
+#!/bin/bash
+date
+set -v
+
+name="cilium-replace"
+master="${name}-control-plane"
+node1="${name}-worker"
+node2="${name}-worker2"
+images=(rykren/netools:latest rykren/kubia:latest quay.io/cilium/cilium-envoy:v1.32.6-1746661844-0f602c28cb2aa57b29078195049fb257d5b5246c quay.io/cilium/cilium:v1.17.4 quay.io/cilium/operator-generic:v1.17.4)
+
+# 1.prep no cni - cluster env
+cat <<EOF | kind create cluster --name=${name} --image=kindest/node:v1.29.2 --config=-
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+
+networking:
+  kubeProxyMode: "none"
+  disableDefaultCNI: true
+  podSubnet: 10.233.64.0/18
+  serviceSubnet: 10.233.0.0/18
+EOF
+
+# 2.remove taints
+node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
+kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
+kubectl get nodes -o wide
+
+
+# 3.install CNI [Calico v3.26.1]
+for i in "${images[@]}"
+do
+    docker pull $i
+    kind load docker-image --name=${name} $i
+done
+
+# 4.deploy clab
+cat <<EOF>clab.yaml | clab deploy --reconfigure -t clab.yaml -
+name: ${name}
+mgmt:
+  network: clab
+  bridge: clab
+  ipv4-subnet: 172.30.30.0/24 # ip range for the docker network
+  ipv4-gw: 172.30.30.1 # set custom gateway ip
+topology:
+  nodes:
+    leaf: 
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos/config-leaf.cfg:/opt/vyatta/etc/config/config.boot
+
+
+    server1:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:${master}
+      exec:
+      - ip addr add 192.168.10.11/24 dev net0
+
+    server2:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:${node1}
+      exec:
+      - ip addr add 192.168.10.12/24 dev net0
+
+    server3:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:${node2}
+      exec:
+      - ip addr add 192.168.10.13/24 dev net0
+
+    client:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 192.168.10.15/24 dev net0
+      - ip route replace default via 192.168.10.1
+  links:
+  - endpoints: ["leaf:eth1", "server1:net0"]
+  - endpoints: ["leaf:eth2", "server2:net0"]
+  - endpoints: ["leaf:eth3", "server3:net0"]
+  - endpoints: ["leaf:eth4", "client:net0"]
+
+EOF
+
+cp /root/.kube/config /root/.kube/config-${name}
+
+helm install cilium cilium/cilium --kubeconfig=/root/.kube/config-${name} --version 1.17.4 --namespace kube-system --set enableIPv4Masquerade=false --set enableIdentityMark=false --set routingMode=native --set autoDirectNodeRoutes=true --set kubeProxyReplacement=true --set k8sServiceHost=${node_ip} --set k8sServicePort=6443
+
+
