@@ -211,6 +211,7 @@ EOF
 
 kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset-thick.yml
 
+# calico ipamconfig + kubelet maxPods 配置手动修改
 #docker cp testdata/macvlan ${master}:/opt/cni/bin/
 #docker cp calicoctl multus-control-plane:/usr/local/bin/
 
