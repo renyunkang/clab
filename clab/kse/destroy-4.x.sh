@@ -2,9 +2,9 @@
 date
 set -v
 
-name="kse4"
+name="test"
 kind delete cluster --name=${name}
 
-rm  /root/.kube/config-4.0
+rm  /root/.kube/config-test
 
-sed -i '/# begin kind cluster-kse4/,/# end kind cluster-kse4/d' ~/.bash_aliases
+sed -i '/# begin kind cluster-test/,/# end kind cluster-test/d' ~/.bash_aliases

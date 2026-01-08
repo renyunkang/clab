@@ -1,0 +1,18 @@
+apiVersion: crd.projectcalico.org/v1
+kind: BGPFilter
+metadata:
+  name: my-filter
+spec:
+  exportV4:
+  - action: Reject
+    cidr: 10.233.85.0/24
+    matchOperator: In
+    #source: RemotePeers
+    #  importV4:
+    #  - action: Accept
+    #    cidr: 55.0.0.0/16
+    #    matchOperator: In
+    #  - action: Reject
+    #    cidr: 44.0.0.0/16
+    #    matchOperator: NotIn
+

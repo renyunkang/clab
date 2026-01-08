@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netools
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: netools
+  template:
+    metadata:
+      labels:
+        app: netools
+    spec:
+      containers:
+        - image: rykren/netools
+          imagePullPolicy: IfNotPresent
+          name: netools
+          ports:
+            - containerPort: 80
+      nodeSelector:
+        kubernetes.io/hostname: calico-rr-worker

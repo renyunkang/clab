@@ -6,7 +6,7 @@ name="noderr"
 master="${name}-control-plane"
 node1="${name}-worker"
 node2="${name}-worker2"
-k8simages="kindest/node:v1.24.7@sha256:577c630ce8e509131eab1aea12c022190978dd2f745aac5eb1fe65c0807eb315"
+k8simages="kindest/node:v1.24.17@sha256:bad10f9b98d54586cba05a7eaa1b61c6b90bfc4ee174fdc43a7b75ca75c95e51"
 
 # 1.prep no cni - cluster env
 cat <<EOF | kind create cluster --name=${name} --image=${k8simages} --config=-
@@ -49,7 +49,7 @@ kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.
 kubectl label $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/master=""
 kubectl get nodes -o wide
 
-# 3.deploy clab and run bird node
+# 3.deploy clab and run bird node - #rykren/vyos:1.4
 cat << EOF > clab.yaml | clab deploy --reconfigure -t clab.yaml -
 name: ${name}
 mgmt:
@@ -107,9 +107,12 @@ EOF
 
 # 4.config cni and load images
 kind load docker-image --name=${name} rykren/netools:latest
-kind load docker-image --name=${name} calico/node:v3.26.1
-kind load docker-image --name=${name} calico/kube-controllers:v3.26.1
-kind load docker-image --name=${name} calico/cni:v3.26.1
+kind load docker-image --name=${name} calico/node:v3.27.5
+kind load docker-image --name=${name} calico/kube-controllers:v3.27.5
+kind load docker-image --name=${name} calico/cni:v3.27.5
+# kind load docker-image --name=${name} calico/node:v3.27.2
+# kind load docker-image --name=${name} calico/kube-controllers:v3.27.2
+# kind load docker-image --name=${name} calico/cni:v3.27.2
 kubectl apply -f ./calico.yaml
 
 kubectl wait --timeout=100s --for=condition=Ready=true pods --all -A
@@ -130,7 +133,7 @@ metadata:
 EOF
 
 # 4.3. add() bgp configuration for the nodes
-calicoctl label nodes ${master} routeReflector=10.0.0.1 --overwrite
+calicoctl --allow-version-mismatch label nodes ${master} routeReflector=10.0.0.1 --overwrite
 calicoctl --allow-version-mismatch patch node ${master} --patch '{"spec": {"bgp": {"asNumber": "64512", "routeReflectorClusterID": "10.0.0.1"}}}'
 calicoctl --allow-version-mismatch patch node ${node1} --patch '{"spec": {"bgp": {"asNumber": "64512"}}}'
 calicoctl --allow-version-mismatch patch node ${node2} --patch '{"spec": {"bgp": {"asNumber": "64512"}}}'
@@ -152,5 +155,6 @@ spec:
   nodeSelector: "has(routeReflector)"
   peerIP: 192.168.0.1
   asNumber: 64510
+  keepOriginalNextHop: true
 EOF
 

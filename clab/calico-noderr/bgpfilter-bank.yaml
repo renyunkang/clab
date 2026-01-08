@@ -1,0 +1,59 @@
+apiVersion: crd.projectcalico.org/v1
+kind: BGPFilter
+metadata:
+  name: bgpfilter-service
+spec:
+  exportV4:
+  - action: Accept
+    cidr: 15.68.219.0/24
+    matchOperator: In
+  - action: Accept
+    cidr: 15.68.220.0/24
+    matchOperator: In
+  importV4:
+  - action: Accept
+    cidr: 15.68.219.0/24
+    matchOperator: In
+  - action: Accept
+    cidr: 15.68.220.0/24
+    matchOperator: In
+---
+apiVersion: crd.projectcalico.org/v1
+kind: BGPFilter
+metadata:
+  name: bgpfilter-deny
+spec:
+  exportV4:
+  - action: Reject
+    cidr: 0.0.0.0/0
+    matchOperator: In
+  importV4:
+  - action: Reject
+    cidr: 0.0.0.0/0
+    matchOperator: In
+---
+apiVersion: crd.projectcalico.org/v1
+kind: BGPFilter
+metadata:
+  name: bgpfilter-manager
+spec:
+  exportV4:
+  - action: Accept
+    cidr: 15.68.216.0/24
+    matchOperator: In
+  - action: Accept
+    cidr: 15.68.217.0/24
+    matchOperator: In
+  - action: Accept
+    cidr: 15.68.218.0/24
+    matchOperator: In
+  importV4:
+  - action: Accept
+    cidr: 15.68.216.0/24
+    matchOperator: In
+  - action: Accept
+    cidr: 15.68.217.0/24
+    matchOperator: In
+  - action: Accept
+    cidr: 15.68.218.0/24
+    matchOperator: In
