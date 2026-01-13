@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netools-static
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netools-static
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan-whereabouts-static
+      labels:
+        app: netools-static
+    spec:
+      containers:
+        - image: rykren/netools
+          name: netools-static
+          ports:
+            - containerPort: 80
+

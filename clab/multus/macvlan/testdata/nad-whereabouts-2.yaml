@@ -1,0 +1,27 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-example
+spec:
+  config: '{
+      "cniVersion": "0.3.0",
+      "type": "macvlan",
+      "master": "eth2.74",
+      "mode": "bridge",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "172.31.74.0/24",
+        "range_start": "172.31.74.100",
+        "range_end": "172.31.74.200",
+        "routes": [
+          { "dst": "172.31.70.0/24", "gw": "172.31.74.1" },
+          { "dst": "172.32.0.0/16", "gw": "172.31.74.1" }
+        ],
+        "gateway": "172.31.74.1",
+        "exclude": [
+           "172.31.74.104/30",
+           "172.31.74.110/32"
+        ]
+      }
+    }'
+

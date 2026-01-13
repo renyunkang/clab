@@ -1,0 +1,11 @@
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderMultusConfig
+metadata:
+  name: macvlan-conf
+  namespace: kube-system
+spec:
+  cniType: macvlan
+  # enableCoordinator: true
+  macvlan:
+    master:
+    - eth0

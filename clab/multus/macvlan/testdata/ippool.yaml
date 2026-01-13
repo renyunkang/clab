@@ -1,0 +1,13 @@
+apiVersion: crd.projectcalico.org/v1
+kind: IPPool
+metadata:
+  name: ippool
+spec:
+  blockSize: 26
+  cidr: 192.168.12.0/24
+  ipipMode: Never
+  disableBGPExport: true
+  natOutgoing: true
+  nodeSelector: all()
+  vxlanMode: Never
+

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netools-example
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: netools-example
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan-example
+      labels:
+        app: netools-example
+    spec:
+      containers:
+        - image: rykren/netools
+          name: netools-example
+          ports:
+            - containerPort: 80
+
