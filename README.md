@@ -36,9 +36,9 @@ sudo sh get-docker.sh
 https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
 ```shell
 # For AMD64 / x86_64
-[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.22.0/kind-linux-amd64
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.31.0/kind-linux-amd64
 # For ARM64
-[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.22.0/kind-linux-arm64
+[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.31.0/kind-linux-arm64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 ```
@@ -73,7 +73,7 @@ https://github.com/derailed/k9s/releases
 curl -sS https://webinstall.dev/k9s | bash
 
 # other way: download binary
-wget https://github.com/derailed/k9s/releases/download/v0.32.4/k9s_Linux_amd64.tar.gz
+wget https://github.com/derailed/k9s/releases/download/v0.50.18/k9s_Linux_amd64.tar.gz
 tar -zxf k9s_Linux_amd64.tar.gz
 chmod +x ./k9s
 mv ./k9s /usr/local/bin/k9s
