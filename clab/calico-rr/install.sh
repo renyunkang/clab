@@ -229,6 +229,15 @@ spec:
 EOF
 
 kubectl patch ippool default-ipv4-ippool --type='json' -p='[{"op": "replace", "path": "/spec/ipipMode", "value":"Never"}]'
+kubectl patch ipamconfigs default --type='json' -p='[{"op": "replace", "path": "/spec/maxBlocksPerHost", "value": 300}]'
+docker exec -it ${master} sh -c 'echo "maxPods: 300" >> /var/lib/kubelet/config.yaml'
+docker exec -it ${master} service kubelet restart
+docker exec -it ${node1} sh -c 'echo "maxPods: 300" >> /var/lib/kubelet/config.yaml'
+docker exec -it ${node1} service kubelet restart
+docker exec -it ${node2} sh -c 'echo "maxPods: 300" >> /var/lib/kubelet/config.yaml'
+docker exec -it ${node2} service kubelet restart
+docker exec -it ${node3} sh -c 'echo "maxPods: 300" >> /var/lib/kubelet/config.yaml'
+docker exec -it ${node3} service kubelet restart
 docker cp calicoctl ${master}:/usr/local/bin/
 docker cp calicoctl ${node1}:/usr/local/bin/
 docker cp calicoctl ${node2}:/usr/local/bin/
