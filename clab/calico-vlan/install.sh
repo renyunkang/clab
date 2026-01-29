@@ -215,12 +215,6 @@ kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-c
 #docker cp testdata/macvlan ${master}:/opt/cni/bin/
 #docker cp calicoctl multus-control-plane:/usr/local/bin/
 
-kubectl apply -f https://github.com/k8snetworkplumbingwg/whereabouts/blob/v0.9.2/doc/crds/daemonset-install.yaml
-kubectl apply -f https://github.com/k8snetworkplumbingwg/whereabouts/blob/v0.9.2/doc/crds/whereabouts.cni.cncf.io_ippools.yaml
-kubectl apply -f https://github.com/k8snetworkplumbingwg/whereabouts/blob/v0.9.2/doc/crds/whereabouts.cni.cncf.io_overlappingrangeipreservations.yaml
-
-
-#kubectl apply \
-#    -f doc/crds/daemonset-install.yaml \
-#    -f doc/crds/whereabouts.cni.cncf.io_ippools.yaml \
-#    -f doc/crds/whereabouts.cni.cncf.io_overlappingrangeipreservations.yaml
+kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/whereabouts/refs/tags/v0.9.2/doc/crds/daemonset-install.yaml
+kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/whereabouts/refs/tags/v0.9.2/doc/crds/whereabouts.cni.cncf.io_ippools.yaml
+kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/whereabouts/refs/tags/v0.9.2/doc/crds/whereabouts.cni.cncf.io_overlappingrangeipreservations.yaml
