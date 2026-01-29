@@ -1,0 +1,129 @@
+name: spider-mul
+mgmt:
+  network: clab
+  bridge: clab
+  ipv4-subnet: 172.30.30.0/24 # ip range for the docker network
+  ipv4-gw: 172.30.30.1 # set custom gateway ip
+topology:
+  nodes:
+    spine1:
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos-mul-route/config-spine1.cfg:/opt/vyatta/etc/config/config.boot
+
+    spine2:
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos-mul-route/config-spine2.cfg:/opt/vyatta/etc/config/config.boot
+
+    spine3:
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos-mul-route/config-spine3.cfg:/opt/vyatta/etc/config/config.boot
+
+    leaf1:
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos-mul-route/config-leaf1.cfg:/opt/vyatta/etc/config/config.boot
+
+    leaf2: 
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos-mul-route/config-leaf2.cfg:/opt/vyatta/etc/config/config.boot
+
+    leaf3:
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos-mul-route/config-leaf3.cfg:/opt/vyatta/etc/config/config.boot
+
+    server1:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:spider-mul-control-plane
+      exec:
+      - ip link add link eth2 name eth2.73 type vlan id 73
+      - ip link add link eth2 name eth2.74 type vlan id 74
+      - ip link add link eth2 name eth2.75 type vlan id 75
+      - ip link set dev eth2.73 up
+      - ip link set dev eth2.74 up
+      - ip link set dev eth2.75 up
+      # - ip addr add 172.31.73.22/24 dev eth2.73
+      # - ip addr add 172.31.74.22/24 dev eth2.74
+      - ip addr add 172.31.75.22/24 dev eth2.75
+      - ip r add 172.32.60.0/24 via 172.31.75.1 dev eth2.75
+      - ip addr add 172.31.50.22/24 dev eth1
+      # - ip route replace default via 172.31.50.1
+
+    server2:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:spider-mul-worker
+      exec:
+      - ip link add link eth2 name eth2.73 type vlan id 73
+      - ip link add link eth2 name eth2.74 type vlan id 74
+      - ip link add link eth2 name eth2.75 type vlan id 75
+      - ip link set dev eth2.73 up
+      - ip link set dev eth2.74 up
+      - ip link set dev eth2.75 up
+      # - ip addr add 172.31.73.23/24 dev eth2.73
+      # - ip addr add 172.31.74.23/24 dev eth2.74
+      - ip addr add 172.31.75.23/24 dev eth2.75
+      - ip r add 172.32.60.0/24 via 172.31.75.1 dev eth2.75
+      - ip addr add 172.31.50.23/24 dev eth1
+      # - ip route replace default via 172.31.50.1
+
+    server3:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:spider-mul-worker2
+      exec:
+      - ip link add link eth2 name eth2.73 type vlan id 73
+      - ip link add link eth2 name eth2.74 type vlan id 74
+      - ip link add link eth2 name eth2.75 type vlan id 75
+      - ip link set dev eth2.73 up
+      - ip link set dev eth2.74 up
+      - ip link set dev eth2.75 up
+      # - ip addr add 172.31.73.24/24 dev eth2.73
+      # - ip addr add 172.31.74.24/24 dev eth2.74
+      - ip addr add 172.31.75.24/24 dev eth2.75
+      - ip r add 172.32.60.0/24 via 172.31.75.1 dev eth2.75
+      - ip addr add 172.31.50.24/24 dev eth1
+      # - ip route replace default via 172.31.50.1
+
+    server4:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 172.32.60.2/24 dev eth1
+      - ip route replace default via 172.32.60.1
+
+  links:
+  - endpoints: ["spine1:eth1", "leaf1:eth1"]
+  - endpoints: ["leaf1:eth2", "server1:eth1"]
+  - endpoints: ["leaf1:eth3", "server2:eth1"]
+  - endpoints: ["leaf1:eth4", "server3:eth1"]
+  - endpoints: ["spine2:eth2", "leaf2:eth1"]
+  - endpoints: ["spine2:eth1", "spine3:eth1"]
+  - endpoints: ["leaf2:eth2", "server1:eth2"]
+  - endpoints: ["leaf2:eth3", "server2:eth2"]
+  - endpoints: ["leaf2:eth4", "server3:eth2"]
+  - endpoints: ["spine3:eth2", "leaf3:eth1"]
+  - endpoints: ["leaf3:eth2", "server4:eth1"]
