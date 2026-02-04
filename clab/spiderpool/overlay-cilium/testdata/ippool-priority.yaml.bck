@@ -1,0 +1,139 @@
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderMultusConfig
+metadata:
+  name: eth1-vlan70
+  namespace: kube-system
+spec:
+  cniType: macvlan
+  enableCoordinator: true
+  macvlan:
+    master:
+    - eth1
+    vlanID: 70
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderMultusConfig
+metadata:
+  name: eth1-vlan71
+  namespace: kube-system
+spec:
+  cniType: macvlan
+  enableCoordinator: true
+  macvlan:
+    master:
+    - eth1
+    vlanID: 71
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderMultusConfig
+metadata:
+  name: eth1-vlan72
+  namespace: kube-system
+spec:
+  cniType: macvlan
+  enableCoordinator: true
+  macvlan:
+    master:
+    - eth1
+    vlanID: 72
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderMultusConfig
+metadata:
+  name: eth1-vlan73
+  namespace: kube-system
+spec:
+  cniType: macvlan
+  enableCoordinator: true
+  macvlan:
+    master:
+    - eth1
+    vlanID: 73
+    ippools:
+      ipv4: ["ippool-73"]
+      ipv6: ["ippool-v6*"]
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-70
+spec:
+  subnet: 172.31.64.0/20
+  gateway: 172.31.70.1
+  ips:
+    - 172.31.70.10-172.31.70.15
+  multusName:
+    - kube-system/eth1-vlan70
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-71
+spec:
+  subnet: 172.31.64.0/20
+  gateway: 172.31.71.1
+  ips:
+    - 172.31.71.10-172.31.71.15
+  multusName:
+    - kube-system/eth1-vlan71
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-72
+spec:
+  default: true
+  subnet: 172.31.64.0/22
+  gateway: 172.31.72.1
+  ips:
+    - 172.31.72.10-172.31.72.15
+  multusName:
+    - kube-system/eth1-vlan72
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-73
+spec:
+  subnet: 172.31.64.0/20
+  gateway: 172.31.73.1
+  ips:
+    - 172.31.73.10-172.31.73.15
+  multusName:
+    - kube-system/eth1-vlan73
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    ipam.spidernet.io/default-ipv4-ippool: '["ippool-75", "no-exist-ippool*"]'
+  name: ippool-test
+spec: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netools-ippool
+  namespace: ippool-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: netools-ippool
+  template:
+    metadata:
+      annotations:
+        ipam.spidernet.io/ippool: |-
+          {
+            "ipv4": ["ippool-75"]
+          }
+        k8s.v1.cni.cncf.io/networks: kube-system/eth1-vlan75
+      labels:
+        app: netools-ippool
+    spec:
+      containers:
+        - image: rykren/netools
+          imagePullPolicy: IfNotPresent
+          name: netools
+          ports:
+            - containerPort: 80

@@ -1,0 +1,51 @@
+name: spiderpool
+mgmt:
+  network: clab
+  bridge: clab
+  ipv4-subnet: 172.30.30.0/24 # ip range for the docker network
+  ipv4-gw: 172.30.30.1 # set custom gateway ip
+topology:
+  nodes:
+
+    route: 
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos/config.cfg:/opt/vyatta/etc/config/config.boot
+
+    server1:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:spiderpool-control-plane
+      exec:
+      - ip addr add 172.31.50.22/24 dev eth1
+
+    server2:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:spiderpool-worker
+      exec:
+      - ip addr add 172.31.50.23/24 dev eth1
+      # - ip r add 172.32.60.0/24 via 172.31.75.1 dev eth2.75
+
+    server3:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:spiderpool-worker2
+      exec:
+      - ip addr add 172.31.50.24/24 dev eth1
+
+    server4:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 172.31.50.50/24 dev eth1
+      - ip route replace default via 172.31.50.1
+
+  links:
+  - endpoints: ["route:eth1", "server1:eth1"]
+  - endpoints: ["route:eth2", "server2:eth1"]
+  - endpoints: ["route:eth3", "server3:eth1"]
+  - endpoints: ["route:eth4", "server4:eth1"]

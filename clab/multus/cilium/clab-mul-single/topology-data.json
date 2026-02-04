@@ -1,0 +1,239 @@
+{
+  "name": "mul-single",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "clab",
+        "ipv4-subnet": "172.30.30.0/24",
+        "ipv4-gw": "172.30.30.1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "route": {
+      "index": "0",
+      "shortname": "route",
+      "longname": "clab-mul-single-route",
+      "fqdn": "route.mul-single.io",
+      "group": "",
+      "labdir": "/root/clab/clab/multus/cilium/clab-mul-single/route",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/multus/cilium/clab-mul-single/route",
+        "clab-node-name": "route",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/multus/cilium/clab-single.yaml",
+        "containerlab": "mul-single"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 179,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-mul-single-server1",
+      "fqdn": "server1.mul-single.io",
+      "group": "",
+      "labdir": "/root/clab/clab/multus/cilium/clab-mul-single/server1",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/multus/cilium/clab-mul-single/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/multus/cilium/clab-single.yaml",
+        "containerlab": "mul-single"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-mul-single-server2",
+      "fqdn": "server2.mul-single.io",
+      "group": "",
+      "labdir": "/root/clab/clab/multus/cilium/clab-mul-single/server2",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/multus/cilium/clab-mul-single/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/multus/cilium/clab-single.yaml",
+        "containerlab": "mul-single"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server3": {
+      "index": "3",
+      "shortname": "server3",
+      "longname": "clab-mul-single-server3",
+      "fqdn": "server3.mul-single.io",
+      "group": "",
+      "labdir": "/root/clab/clab/multus/cilium/clab-mul-single/server3",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/multus/cilium/clab-mul-single/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/multus/cilium/clab-single.yaml",
+        "containerlab": "mul-single"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server4": {
+      "index": "4",
+      "shortname": "server4",
+      "longname": "clab-mul-single-server4",
+      "fqdn": "server4.mul-single.io",
+      "group": "",
+      "labdir": "/root/clab/clab/multus/cilium/clab-mul-single/server4",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/multus/cilium/clab-mul-single/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/multus/cilium/clab-single.yaml",
+        "containerlab": "mul-single"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:1e:83:64",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:84:b8:ec",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:7a:cf:18",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:d9:78:c8",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:70:d1:88",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:5f:c6:e5",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:34:9f:79",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:0a:95:20",
+        "peer": "a"
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderMultusConfig
+metadata:
+  name: vlan70-no-default
+  namespace: kube-system
+spec:
+  cniType: macvlan
+  enableCoordinator: true
+  macvlan:
+    master:
+    - eth1
+    vlanID: 70
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderMultusConfig
+metadata:
+  name: vlan70-default
+  namespace: kube-system
+spec:
+  cniType: macvlan
+  enableCoordinator: true
+  macvlan:
+    master:
+    - eth1
+    vlanID: 70
+    ippools:
+      ipv4: ["ippool-70-cni"]
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-70-specify
+spec:
+  subnet: 172.31.70.0/24
+  gateway: 172.31.70.1
+  ips:
+    - 172.31.70.10-172.31.70.15
+  multusName:
+    - kube-system/vlan70-no-default
+    - kube-system/vlan70-default
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-70-namespace
+spec:
+  subnet: 172.31.70.0/24
+  gateway: 172.31.70.1
+  ips:
+    - 172.31.70.20-172.31.70.25
+  multusName:
+    - kube-system/vlan70-no-default
+    - kube-system/vlan70-default
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-70-cni
+spec:
+  subnet: 172.31.70.0/24
+  gateway: 172.31.70.1
+  ips:
+    - 172.31.70.30-172.31.70.35
+  multusName:
+    - kube-system/vlan70-no-default
+    - kube-system/vlan70-default
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-70-default
+spec:
+  default: true
+  subnet: 172.31.70.0/24
+  gateway: 172.31.70.1
+  ips:
+    - 172.31.70.40-172.31.70.45
+  multusName:
+    - kube-system/vlan70-no-default
+    - kube-system/vlan70-default
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  #annotations:
+  #  ipam.spidernet.io/default-ipv4-ippool: '["ippool-70-namespace", "no-exist-ippool*"]'
+  name: ippool-test
+spec: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netools-ippool
+  namespace: ippool-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: netools-ippool
+  template:
+    metadata:
+      annotations:
+        # ipam.spidernet.io/ippool: |-
+        #  {
+        #    "ipv4": ["ippool-70-specify"]
+        #  }
+        # k8s.v1.cni.cncf.io/networks: kube-system/vlan70-default
+        k8s.v1.cni.cncf.io/networks: kube-system/vlan70-no-default
+      labels:
+        app: netools-ippool
+    spec:
+      containers:
+        - image: rykren/netools
+          imagePullPolicy: IfNotPresent
+          name: netools
+          ports:
+            - containerPort: 80

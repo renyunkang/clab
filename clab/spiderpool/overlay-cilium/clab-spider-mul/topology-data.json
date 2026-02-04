@@ -1,0 +1,547 @@
+{
+  "name": "spider-mul",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "clab",
+        "ipv4-subnet": "172.30.30.0/24",
+        "ipv4-gw": "172.30.30.1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "leaf1": {
+      "index": "0",
+      "shortname": "leaf1",
+      "longname": "clab-spider-mul-leaf1",
+      "fqdn": "leaf1.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/leaf1",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/leaf1",
+        "clab-node-name": "leaf1",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 179,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "leaf2": {
+      "index": "1",
+      "shortname": "leaf2",
+      "longname": "clab-spider-mul-leaf2",
+      "fqdn": "leaf2.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/leaf2",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/leaf2",
+        "clab-node-name": "leaf2",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 179,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "leaf3": {
+      "index": "2",
+      "shortname": "leaf3",
+      "longname": "clab-spider-mul-leaf3",
+      "fqdn": "leaf3.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/leaf3",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/leaf3",
+        "clab-node-name": "leaf3",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 179,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "server1": {
+      "index": "3",
+      "shortname": "server1",
+      "longname": "clab-spider-mul-server1",
+      "fqdn": "server1.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/server1",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server2": {
+      "index": "4",
+      "shortname": "server2",
+      "longname": "clab-spider-mul-server2",
+      "fqdn": "server2.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/server2",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server3": {
+      "index": "5",
+      "shortname": "server3",
+      "longname": "clab-spider-mul-server3",
+      "fqdn": "server3.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/server3",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server4": {
+      "index": "6",
+      "shortname": "server4",
+      "longname": "clab-spider-mul-server4",
+      "fqdn": "server4.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/server4",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+      ]
+    },
+    "spine1": {
+      "index": "7",
+      "shortname": "spine1",
+      "longname": "clab-spider-mul-spine1",
+      "fqdn": "spine1.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/spine1",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/spine1",
+        "clab-node-name": "spine1",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 179,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "spine2": {
+      "index": "8",
+      "shortname": "spine2",
+      "longname": "clab-spider-mul-spine2",
+      "fqdn": "spine2.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/spine2",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/spine2",
+        "clab-node-name": "spine2",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 179,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "spine3": {
+      "index": "9",
+      "shortname": "spine3",
+      "longname": "clab-spider-mul-spine3",
+      "fqdn": "spine3.spider-mul.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/spine3",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay/clab-spider-mul/spine3",
+        "clab-node-name": "spine3",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay/clab-mul-route.yaml",
+        "containerlab": "spider-mul"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 179,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "spine1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:d4:5c:59",
+        "peer": "z"
+      },
+      "z": {
+        "node": "leaf1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:50:88:f4",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:b9:28:3a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:38:ef:2e",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:56:90:8a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:1a:2d:95",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf1",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:9b:4b:4a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:9d:d9:70",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "spine2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:e0:28:fa",
+        "peer": "z"
+      },
+      "z": {
+        "node": "leaf2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:5d:72:db",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "spine2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:49:66:cb",
+        "peer": "z"
+      },
+      "z": {
+        "node": "spine3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:9a:00:3d",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:6a:84:d2",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:01:85:41",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf2",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:64:e0:fe",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:e4:f8:94",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf2",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:29:f1:d3",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:61:ac:e3",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "spine3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:9b:17:60",
+        "peer": "z"
+      },
+      "z": {
+        "node": "leaf3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:08:ce:a3",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "leaf3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:66:50:c1",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:9c:a9:f6",
+        "peer": "a"
+      }
+    }
+  ]
+}

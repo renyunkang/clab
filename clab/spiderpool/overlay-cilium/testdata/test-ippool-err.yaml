@@ -1,0 +1,52 @@
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderMultusConfig
+metadata:
+  name: eth1-vlan75
+  namespace: kube-system
+spec:
+  cniType: macvlan
+  enableCoordinator: true
+  macvlan:
+    master:
+    - eth1
+    vlanID: 75
+---
+apiVersion: spiderpool.spidernet.io/v2beta1
+kind: SpiderIPPool
+metadata:
+  name: ippool-74
+spec:
+  default: true
+  subnet: 172.31.72.0/22
+  gateway: 172.31.74.1
+  excludeIPs:
+    - 172.31.74.254
+  ips:
+    - 172.31.74.10-172.31.74.15
+    - 172.31.74.120-172.31.74.150
+  routes:
+    - dst: 172.32.60.0/24
+      gw: 172.31.74.1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netools-ippool1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: netools-ippool1
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: kube-system/eth1-vlan75
+      labels:
+        app: netools-ippool1
+    spec:
+      containers:
+        - image: rykren/netools
+          imagePullPolicy: IfNotPresent
+          name: netools
+          ports:
+            - containerPort: 80

@@ -1,0 +1,281 @@
+{
+  "name": "bond",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "clab",
+        "ipv4-subnet": "172.30.30.0/24",
+        "ipv4-gw": "172.30.30.1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "route": {
+      "index": "0",
+      "shortname": "route",
+      "longname": "clab-bond-route",
+      "fqdn": "route.bond.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/route",
+      "kind": "linux",
+      "image": "rykren/vyos:1.4",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/route",
+        "clab-node-name": "route",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond.yaml",
+        "containerlab": "bond"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 179,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "server1": {
+      "index": "1",
+      "shortname": "server1",
+      "longname": "clab-bond-server1",
+      "fqdn": "server1.bond.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/server1",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/server1",
+        "clab-node-name": "server1",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond.yaml",
+        "containerlab": "bond"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server2": {
+      "index": "2",
+      "shortname": "server2",
+      "longname": "clab-bond-server2",
+      "fqdn": "server2.bond.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/server2",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/server2",
+        "clab-node-name": "server2",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond.yaml",
+        "containerlab": "bond"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server3": {
+      "index": "3",
+      "shortname": "server3",
+      "longname": "clab-bond-server3",
+      "fqdn": "server3.bond.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/server3",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/server3",
+        "clab-node-name": "server3",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond.yaml",
+        "containerlab": "bond"
+      },
+      "port-bindings": [
+      ]
+    },
+    "server4": {
+      "index": "4",
+      "shortname": "server4",
+      "longname": "clab-bond-server4",
+      "fqdn": "server4.bond.io",
+      "group": "",
+      "labdir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/server4",
+      "kind": "linux",
+      "image": "rykren/netools:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.30.30.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "clab",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond/server4",
+        "clab-node-name": "server4",
+        "clab-node-type": "",
+        "clab-owner": "root",
+        "clab-topo-file": "/root/clab/clab/spiderpool/overlay-cilium/clab-bond.yaml",
+        "containerlab": "bond"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:2e:0d:49",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:ac:eb:4c",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:d1:de:12",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:4d:89:0a",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:a4:fd:ec",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:42:8f:19",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:81:ee:04",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:9f:6f:d8",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth5",
+        "mac": "aa:c1:ab:d8:ba:ac",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:ef:6b:22",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth6",
+        "mac": "aa:c1:ab:34:b2:72",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:1a:dc:b1",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "route",
+        "interface": "eth7",
+        "mac": "aa:c1:ab:3a:fb:ff",
+        "peer": "z"
+      },
+      "z": {
+        "node": "server3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:f5:a4:ef",
+        "peer": "a"
+      }
+    }
+  ]
+}

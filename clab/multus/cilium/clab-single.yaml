@@ -1,0 +1,81 @@
+name: mul-single
+mgmt:
+  network: clab
+  bridge: clab
+  ipv4-subnet: 172.30.30.0/24 # ip range for the docker network
+  ipv4-gw: 172.30.30.1 # set custom gateway ip
+topology:
+  nodes:
+
+    route: 
+      kind: linux
+      image: rykren/vyos:1.4
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - vyos-single-route/config.cfg:/opt/vyatta/etc/config/config.boot
+
+    server1:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:mul-single-control-plane
+      exec:
+      - ip link add link eth1 name eth1.73 type vlan id 73
+      - ip link add link eth1 name eth1.74 type vlan id 74
+      - ip link add link eth1 name eth1.75 type vlan id 75
+      - ip link add link eth1 name eth1.50 type vlan id 50
+      - ip link set dev eth1.50 up
+      - ip link set dev eth1.73 up
+      - ip link set dev eth1.74 up
+      - ip link set dev eth1.75 up
+      - ip addr add 172.31.50.22/24 dev eth1.50
+      - ip addr add 172.31.75.22/24 dev eth1.75
+      # - ip route replace default via 172.31.50.1
+
+    server2:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:mul-single-worker
+      exec:
+      - ip link add link eth1 name eth1.73 type vlan id 73
+      - ip link add link eth1 name eth1.74 type vlan id 74
+      - ip link add link eth1 name eth1.75 type vlan id 75
+      # - ip link add link eth1 name eth1.50 type vlan id 50
+      # - ip link set dev eth1.50 up
+      - ip link set dev eth1.73 up
+      - ip link set dev eth1.74 up
+      - ip link set dev eth1.75 up
+      # - ip addr add 172.31.50.23/24 dev eth1.50
+      - ip addr add 172.31.50.23/24 dev eth1
+      - ip addr add 172.31.75.23/24 dev eth1.75
+      # - ip route replace default via 172.31.50.1
+
+    server3:
+      kind: linux
+      image: rykren/netools:latest
+      network-mode: container:mul-single-worker2
+      exec:
+      - ip link add link eth1 name eth1.73 type vlan id 73
+      - ip link add link eth1 name eth1.74 type vlan id 74
+      - ip link add link eth1 name eth1.75 type vlan id 75
+      - ip link add link eth1 name eth1.50 type vlan id 50
+      - ip link set dev eth1.50 up
+      - ip link set dev eth1.73 up
+      - ip link set dev eth1.74 up
+      - ip link set dev eth1.75 up
+      - ip addr add 172.31.50.24/24 dev eth1.50
+      - ip addr add 172.31.75.24/24 dev eth1.75
+      # - ip route replace default via 172.31.50.1
+
+    server4:
+      kind: linux
+      image: rykren/netools:latest
+      exec:
+      - ip addr add 172.31.50.50/24 dev eth1
+      - ip route replace default via 172.31.50.1
+
+  links:
+  - endpoints: ["route:eth1", "server1:eth1"]
+  - endpoints: ["route:eth2", "server2:eth1"]
+  - endpoints: ["route:eth3", "server3:eth1"]
+  - endpoints: ["route:eth4", "server4:eth1"]
