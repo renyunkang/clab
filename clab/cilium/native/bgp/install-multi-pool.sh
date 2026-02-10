@@ -82,7 +82,7 @@ topology:
   nodes:
     spine1:
       kind: linux
-      image: rykren/vyos:1.4
+      image: unibaktr/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -90,7 +90,7 @@ topology:
 
     spine2:
       kind: linux
-      image: rykren/vyos:1.4
+      image: unibaktr/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -98,7 +98,7 @@ topology:
 
     leaf1:
       kind: linux
-      image: rykren/vyos:1.4
+      image: unibaktr/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -106,7 +106,7 @@ topology:
 
     leaf2:
       kind: linux
-      image: rykren/vyos:1.4
+      image: unibaktr/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -119,16 +119,18 @@ topology:
       network-mode: container:${master}
       exec:
       - ip addr add 10.1.5.11/24 dev net0
-      - ip route replace default via 10.1.5.1
-      - ip route add 172.31.0.0/16 dev eth0
+      - ip route add 10.1.8.0/24 via 10.1.5.1 dev net0
+      # - ip route add 172.31.0.0/16 dev eth0
+      # - ip route replace default via 10.1.5.1
     server2:
       kind: linux
       image: rykren/nettools:latest
       network-mode: container:${node1}
       exec:
       - ip addr add 10.1.5.12/24 dev net0
-      - ip route replace default via 10.1.5.1
-      - ip route add 172.31.0.0/16 dev eth0
+      - ip route add 10.1.8.0/24 via 10.1.5.1 dev net0
+      # - ip route add 172.31.0.0/16 dev eth0
+      # - ip route replace default via 10.1.5.1
 
     server3:
       kind: linux
@@ -136,8 +138,9 @@ topology:
       network-mode: container:${node2}
       exec:
       - ip addr add 10.1.8.13/24 dev net0
-      - ip route replace default via 10.1.8.1
-      - ip route add 172.31.0.0/16 dev eth0
+      - ip route add 10.1.5.0/24 via 10.1.8.1 dev net0
+      # - ip route add 172.31.0.0/16 dev eth0
+      # - ip route replace default via 10.1.8.1
 
     server4:
       kind: linux
@@ -145,8 +148,9 @@ topology:
       network-mode: container:${node3}
       exec:
       - ip addr add 10.1.8.14/24 dev net0
-      - ip route replace default via 10.1.8.1
-      - ip route add 172.31.0.0/16 dev eth0
+      - ip route add 10.1.5.0/24 via 10.1.8.1 dev net0
+      # - ip route add 172.31.0.0/16 dev eth0
+      # - ip route replace default via 10.1.8.1
 
     server5:
       kind: linux
