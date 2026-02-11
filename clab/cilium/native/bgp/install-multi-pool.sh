@@ -8,8 +8,15 @@ node1="${name}-worker"
 node2="${name}-worker2"
 node3="${name}-worker3"
 pathDir="vyos-cilium"
+kind_gateway="172.18.0.1"
 
 k8simages="kindest/node:v1.31.14"
+images=(
+  quay.io/cilium/cilium-envoy:v1.35.9-1768828720-c6e4827ebca9c47af2a3a6540c563c30947bae29
+  quay.io/cilium/operator-generic:v1.19.0
+  quay.io/cilium/cilium:v1.19.0
+  rykren/netools:latest
+)
 
 # 1.prep no cni - cluster env
 cat <<EOF | kind create cluster --name=${name} --image=${k8simages} --config=-
@@ -65,8 +72,8 @@ networking:
   apiServerAddress: 172.31.19.33
   kubeProxyMode: "none"
   disableDefaultCNI: true
-  podSubnet: 10.233.64.0/18
-  serviceSubnet: 10.233.0.0/18
+  podSubnet: 10.232.64.0/18
+  serviceSubnet: 10.232.0.0/18
 EOF
 
 
@@ -82,7 +89,7 @@ topology:
   nodes:
     spine1:
       kind: linux
-      image: unibaktr/vyos:1.4
+      image: rykren/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -90,7 +97,7 @@ topology:
 
     spine2:
       kind: linux
-      image: unibaktr/vyos:1.4
+      image: rykren/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -98,7 +105,7 @@ topology:
 
     leaf1:
       kind: linux
-      image: unibaktr/vyos:1.4
+      image: rykren/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -106,7 +113,7 @@ topology:
 
     leaf2:
       kind: linux
-      image: unibaktr/vyos:1.4
+      image: rykren/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -115,50 +122,46 @@ topology:
 
     server1:
       kind: linux
-      image: rykren/nettools:latest
+      image: rykren/netools:latest
       network-mode: container:${master}
       exec:
       - ip addr add 10.1.5.11/24 dev net0
-      - ip route add 10.1.8.0/24 via 10.1.5.1 dev net0
-      # - ip route add 172.31.0.0/16 dev eth0
-      # - ip route replace default via 10.1.5.1
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
+      - ip route replace default via 10.1.5.1
     server2:
       kind: linux
-      image: rykren/nettools:latest
+      image: rykren/netools:latest
       network-mode: container:${node1}
       exec:
       - ip addr add 10.1.5.12/24 dev net0
-      - ip route add 10.1.8.0/24 via 10.1.5.1 dev net0
-      # - ip route add 172.31.0.0/16 dev eth0
-      # - ip route replace default via 10.1.5.1
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
+      - ip route replace default via 10.1.5.1
 
     server3:
       kind: linux
-      image: rykren/nettools:latest
+      image: rykren/netools:latest
       network-mode: container:${node2}
       exec:
       - ip addr add 10.1.8.13/24 dev net0
-      - ip route add 10.1.5.0/24 via 10.1.8.1 dev net0
-      # - ip route add 172.31.0.0/16 dev eth0
-      # - ip route replace default via 10.1.8.1
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
+      - ip route replace default via 10.1.8.1
 
     server4:
       kind: linux
-      image: rykren/nettools:latest
+      image: rykren/netools:latest
       network-mode: container:${node3}
       exec:
       - ip addr add 10.1.8.14/24 dev net0
-      - ip route add 10.1.5.0/24 via 10.1.8.1 dev net0
-      # - ip route add 172.31.0.0/16 dev eth0
-      # - ip route replace default via 10.1.8.1
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
+      - ip route replace default via 10.1.8.1
 
     server5:
       kind: linux
-      image: rykren/nettools:latest
+      image: rykren/netools:latest
       exec:
       - ip addr add 10.1.8.15/24 dev net0
       - ip route replace default via 10.1.8.1
-      - ip route add 172.31.0.0/16 dev eth0
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
 
   links:
   - endpoints: ["leaf1:eth1", "spine1:eth1"]
@@ -184,6 +187,13 @@ while check_nodes_ready; do
   sleep 5  # 每 5 秒检查一次
 done
 
+# download images
+for i in "${images[@]}"
+do
+    docker pull $i
+    kind load docker-image --name=${name} $i
+done
+
 # 3.remove taints
 node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
 # kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/master:NoSchedule-
@@ -194,45 +204,14 @@ kubectl get nodes -o wide
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
 
-helm install cilium cilium/cilium --namespace kube-system --set routingMode=native --set directRoutingSkipUnreachable=true --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR=10.233.64.0/18 --set bgpControlPlane.enabled=true --set ipam.mode=multi-pool --set bpf.masquerade=true --set ipam.operator.autoCreateCiliumPodIPPools.default.ipv4.cidrs='{10.233.64.0/20}' --set ipam.operator.autoCreateCiliumPodIPPools.default.ipv4.maskSize=24 --set kubeProxyReplacement=true --set k8sServiceHost=${node_ip} --set k8sServicePort=6443
+# helm install cilium cilium/cilium --namespace kube-system --set routingMode=native --set directRoutingSkipUnreachable=true --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR=10.232.64.0/18 --set bgpControlPlane.enabled=true --set bpf.masquerade=true --set ipam.mode=cluster-pool --set ipam.operator.clusterPoolIPv4PodCIDRList=10.232.64.0/18 --set ipam.operator.clusterPoolIPv4MaskSize=20 --set kubeProxyReplacement=true --set k8sServiceHost=${node_ip} --set k8sServicePort=6443
 
-kubectl wait --for=condition=ready -l k8s-app=cilium pod -n kube-system
+helm install cilium cilium/cilium --namespace kube-system --set routingMode=native --set directRoutingSkipUnreachable=true --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR=10.232.64.0/18 --set bgpControlPlane.enabled=true --set ipam.mode=multi-pool --set bpf.masquerade=true --set ipam.operator.autoCreateCiliumPodIPPools.default.ipv4.cidrs='{10.232.64.0/20}' --set ipam.operator.autoCreateCiliumPodIPPools.default.ipv4.maskSize=24 --set kubeProxyReplacement=true --set k8sServiceHost=${node_ip} --set k8sServicePort=6443
+
+# kubectl wait --for=condition=ready -l k8s-app=cilium pod -n kube-system --timeout=60s
+kubectl wait --for=condition=ready -l name=cilium-operator pod -n kube-system --timeout=60s
 
 #  peer to leaf switch
-#cat <<EOF | kubectl apply -f -
-#apiVersion: "cilium.io/v2alpha1"
-#kind: CiliumBGPPeeringPolicy
-#metadata:
-#  name: rack1
-#spec:
-#  nodeSelector:
-#    matchLabels:
-#      rack: rack1
-#  virtualRouters:
-#  - localASN: 65005
-#    exportPodCIDR: true
-#    neighbors:
-#    - peerAddress: "10.1.5.1/24"
-#      peerASN: 65005
-#---
-#apiVersion: "cilium.io/v2alpha1"
-#kind: CiliumBGPPeeringPolicy
-#metadata:
-#  name: rack2
-#spec:
-#  nodeSelector:
-#    matchLabels:
-#      rack: rack2
-#  virtualRouters:
-#  - localASN: 65008
-#    exportPodCIDR: true
-#    neighbors:
-#    - peerAddress: "10.1.8.1/24"
-#      peerASN: 65008
-#EOF
-
-kubectl wait --for=condition=ready -l k8s-app=cilium pod -n kube-system
-
 cat <<EOF | kubectl apply -f -
 apiVersion: cilium.io/v2
 kind: CiliumBGPClusterConfig
@@ -297,9 +276,11 @@ metadata:
     advertise: bgp
 spec:
   advertisements:
-    - advertisementType: "PodCIDR"
-      attributes:
-        communities:
-          standard: [ "65000:99" ]
-        localPreference: 99
+    - advertisementType: "CiliumPodIPPool"
+      selector:
+        matchLabels:
+          ippool: "default"
 EOF
+
+
+kubectl label ciliumpodippools default ippool=default
