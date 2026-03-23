@@ -15,9 +15,24 @@ k8simages="kindest/node:v1.29.2"
 cat <<EOF | kind create cluster --name=${name} --image=${k8simages} --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+# kubeadmConfigPatches:
+#   - |
+#     kind: ClusterConfiguration
+#     apiServer:
+#       certSANs:
+#         - "localhost"
+#         - "127.0.0.1"
+#         - "10.1.5.11"
+#         - "172.31.19.33"
 nodes:
 - role: control-plane
   kubeadmConfigPatches:
+  - |
+    kind: ClusterConfiguration
+    apiServer:
+      certSANs:
+      - "10.1.5.11"
+      - "127.0.0.1"
   - |
     kind: InitConfiguration
     nodeRegistration:
