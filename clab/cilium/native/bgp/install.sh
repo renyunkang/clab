@@ -73,12 +73,7 @@ networking:
   serviceSubnet: 10.233.0.0/18
 EOF
 
-# 2.remove taints
-controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
-kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/master:NoSchedule-
-kubectl get nodes -o wide
-
-# 3.deploy  clab
+# 2.deploy  clab
 cat <<EOF>clab.yaml | clab deploy --reconfigure -t clab.yaml -
 name: ${name}
 mgmt:
@@ -176,6 +171,29 @@ topology:
 
 EOF
 
+check_nodes_ready() {
+  kubectl get nodes -o wide | awk '{print $6}' | grep -q '^<none>$'
+  return $?
+}
+
+while check_nodes_ready; do
+  echo "尚有节点的 INTERNAL-IP 为 none，等待中..."
+  sleep 5  # 每 5 秒检查一次
+done
+
+# download images
+for i in "${images[@]}"
+do
+    docker pull $i
+    kind load docker-image --name=${name} $i
+done
+
+# 3.remove taints
+controller_node_ip=`kubectl get node -o wide --no-headers | grep -E "control-plane|bpf1" | awk -F " " '{print $6}'`
+kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/master:NoSchedule-
+kubectl taint nodes $(kubectl get nodes -o name | grep control-plane) node-role.kubernetes.io/control-plane:NoSchedule-
+kubectl get nodes -o wide
+
 # 4. config cni
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
@@ -216,7 +234,8 @@ helm install cilium cilium/cilium --namespace kube-system --set routingMode=nati
 #EOF
 
 
-sleep 60
+kubectl wait --for=condition=ready -l name=cilium-operator pod -n kube-system --timeout=60s
+
 cat <<EOF | kubectl apply -f -
 apiVersion: cilium.io/v2
 kind: CiliumBGPClusterConfig
