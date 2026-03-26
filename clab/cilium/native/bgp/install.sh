@@ -8,7 +8,7 @@ node1="${name}-worker"
 node2="${name}-worker2"
 node3="${name}-worker3"
 pathDir="vyos-cilium"
-
+kind_gateway="172.18.0.1"
 k8simages="kindest/node:v1.29.2"
 
 # 1.prep no cni - cluster env
@@ -90,7 +90,7 @@ topology:
   nodes:
     spine1:
       kind: linux
-      image: unibaktr/vyos:1.4
+      image: rykren/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -98,7 +98,7 @@ topology:
 
     spine2:
       kind: linux
-      image: unibaktr/vyos:1.4
+      image: rykren/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -106,7 +106,7 @@ topology:
 
     leaf1:
       kind: linux
-      image: unibaktr/vyos:1.4
+      image: rykren/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -114,7 +114,7 @@ topology:
 
     leaf2: 
       kind: linux
-      image: unibaktr/vyos:1.4
+      image: rykren/vyos:1.4
       cmd: /sbin/init
       binds:
         - /lib/modules:/lib/modules
@@ -127,6 +127,7 @@ topology:
       network-mode: container:${master}
       exec:
       - ip addr add 10.1.5.11/24 dev net0
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
       - ip route replace default via 10.1.5.1
     server2:
       kind: linux
@@ -134,6 +135,7 @@ topology:
       network-mode: container:${node1}
       exec:
       - ip addr add 10.1.5.12/24 dev net0
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
       - ip route replace default via 10.1.5.1
 
     server3:
@@ -142,6 +144,7 @@ topology:
       network-mode: container:${node2}
       exec:
       - ip addr add 10.1.8.13/24 dev net0
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
       - ip route replace default via 10.1.8.1
 
     server4:
@@ -150,6 +153,7 @@ topology:
       network-mode: container:${node3}
       exec:
       - ip addr add 10.1.8.14/24 dev net0
+      - ip route add 172.31.0.0/16 via ${kind_gateway} dev eth0
       - ip route replace default via 10.1.8.1
 
     server5:
@@ -176,7 +180,7 @@ EOF
 helm repo add cilium https://helm.cilium.io > /dev/null 2>&1
 helm repo update > /dev/null 2>&1
 
-helm install cilium cilium/cilium --version 1.17.4 --namespace kube-system --set routingMode=native --set directRoutingSkipUnreachable=true --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR=10.233.64.0/18 --set bgpControlPlane.enabled=true
+helm install cilium cilium/cilium --namespace kube-system --set routingMode=native --set directRoutingSkipUnreachable=true --set autoDirectNodeRoutes=true --set ipv4NativeRoutingCIDR=10.233.64.0/18 --set bgpControlPlane.enabled=true
 
 #  peer to leaf switch
 #cat <<EOF | kubectl apply -f -
@@ -214,7 +218,7 @@ helm install cilium cilium/cilium --version 1.17.4 --namespace kube-system --set
 
 sleep 60
 cat <<EOF | kubectl apply -f -
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumBGPClusterConfig
 metadata:
   name: cilium-bgp-rack1
@@ -232,7 +236,7 @@ spec:
       peerConfigRef:
         name: "cilium-peer"
 ---
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumBGPClusterConfig
 metadata:
   name: cilium-bgp-rack2
@@ -250,7 +254,7 @@ spec:
       peerConfigRef:
         name: "cilium-peer"
 ---
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumBGPPeerConfig
 metadata:
   name: cilium-peer
@@ -269,7 +273,7 @@ spec:
         matchLabels:
           advertise: "bgp"
 ---
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumBGPAdvertisement
 metadata:
   name: bgp-advertisements
